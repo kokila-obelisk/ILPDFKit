@@ -50,6 +50,8 @@
          self.autoresizingMask =  UIViewAutoresizingFlexibleHeight|UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleTopMargin|UIViewAutoresizingFlexibleLeftMargin;
         [self addSubview:_pdfView];
         [_pdfView.scrollView setZoomScale:1];
+        _pdfView.scrollView.maximumZoomScale = 1;
+        _pdfView.scrollView.minimumZoomScale = 1;
         [_pdfView.scrollView setContentOffset:CGPointZero];
         //This allows us to prevent the keyboard from obscuring text fields near the botton of the document.
         [_pdfView.scrollView setContentInset:UIEdgeInsetsMake(0, 0, 0, 0)];
@@ -72,33 +74,55 @@
         UITapGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:nil action:NULL];
         [self addGestureRecognizer:tapGestureRecognizer];
         tapGestureRecognizer.delegate = self;
-        
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardFrameWillChange:) name:UIKeyboardWillChangeFrameNotification object:nil];
+
+        // Register for keyboard appearance changes.
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardDidShow:) name:UIKeyboardDidShowNotification object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardDidHide:) name:UIKeyboardDidHideNotification object:nil];
     }
     return self;
 }
 
-// Move UIView up when keyboard shows so it doens't block textfields
-- (void)keyboardFrameWillChange:(NSNotification *)notification
-{
-    CGRect keyboardEndFrame = [[[notification userInfo] objectForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue];
-    CGRect keyboardBeginFrame = [[[notification userInfo] objectForKey:UIKeyboardFrameBeginUserInfoKey] CGRectValue];
-    UIViewAnimationCurve animationCurve = [[[notification userInfo] objectForKey:UIKeyboardAnimationCurveUserInfoKey] integerValue];
-    NSTimeInterval animationDuration = [[[notification userInfo] objectForKey:UIKeyboardAnimationDurationUserInfoKey] integerValue];
-    
-    [UIView beginAnimations:nil context:nil];
-    [UIView setAnimationDuration:animationDuration];
-    [UIView setAnimationCurve:animationCurve];
-    
-    CGRect newFrame = _pdfView.frame;
-    CGRect keyboardFrameEnd = [_pdfView convertRect:keyboardEndFrame toView:nil];
-    CGRect keyboardFrameBegin = [_pdfView convertRect:keyboardBeginFrame toView:nil];
-    
-    newFrame.origin.y -= (keyboardFrameBegin.origin.y - keyboardFrameEnd.origin.y);
-    _pdfView.frame = newFrame;
-    
-    [UIView commitAnimations];
+/**
+ On keyboard appearance,
+ adjust scrollView insets so we can scroll the active widget onto the screen.
+ */
+- (void)keyboardDidShow:(NSNotification*) notification {
+    CGSize keyboardSize = [[[notification userInfo] objectForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue].size;
+    UIEdgeInsets insets = UIEdgeInsetsMake(0, 0, keyboardSize.height, 0);
+    [_pdfView.scrollView setContentInset:insets];
+    [_pdfView.scrollView setScrollIndicatorInsets:insets];
+    [self scrollActiveWidgetToVisible];
 }
+
+/**
+ On keyboard hiding,
+ Just reset the scroll insets.
+*/
+- (void)keyboardDidHide:(NSNotification*) notification {
+    UIEdgeInsets insets = UIEdgeInsetsZero;
+    [_pdfView.scrollView setContentInset:insets];
+    [_pdfView.scrollView setScrollIndicatorInsets:insets];
+    [self scrollActiveWidgetToVisible];
+}
+
+/**
+ Hook the setter for activeWidgetAnnotationView, and update widget visibility.
+ */
+- (void) setActiveWidgetAnnotationView:(PDFWidgetAnnotationView *)activeWidgetAnnotationView {
+    _activeWidgetAnnotationView = activeWidgetAnnotationView;
+    [self scrollActiveWidgetToVisible];
+}
+
+/**
+ Scroll the active widget into view, if it'll be obscured by the new keyboard rect.
+ */
+- (void) scrollActiveWidgetToVisible {
+    if( _activeWidgetAnnotationView ) {
+        CGRect widgetRect = [_pdfView.scrollView convertRect:_activeWidgetAnnotationView.bounds fromView:_activeWidgetAnnotationView];
+        [_pdfView.scrollView scrollRectToVisible:widgetRect animated:YES];
+    }
+}
+
 
 - (void)dealloc
 {
