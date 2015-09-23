@@ -21,7 +21,7 @@
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     self.window.backgroundColor = [UIColor whiteColor];
     
-    _pdfViewController = [[PDFViewController alloc] initWithResource:@"testA.pdf"];
+    _pdfViewController = [[PDFViewController alloc] initWithResource:@"testB.pdf"];
     _pdfViewController.title = @"Sample PDF";
     
     _navigationController = [[UINavigationController alloc] initWithRootViewController:_pdfViewController];

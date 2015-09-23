@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		07D994641BB21A7E00018198 /* testB.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 07D994631BB21A7E00018198 /* testB.pdf */; settings = {ASSET_TAGS = (); }; };
 		67AB6D1C18C5189F005E8D36 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 67AB6D1B18C5189F005E8D36 /* Foundation.framework */; };
 		67AB6D1E18C5189F005E8D36 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 67AB6D1D18C5189F005E8D36 /* CoreGraphics.framework */; };
 		67AB6D2018C5189F005E8D36 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 67AB6D1F18C5189F005E8D36 /* UIKit.framework */; };
@@ -39,6 +40,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		07D994631BB21A7E00018198 /* testB.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = testB.pdf; sourceTree = "<group>"; };
 		67AB6D1818C5189F005E8D36 /* ILPDFKitSample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ILPDFKitSample.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		67AB6D1B18C5189F005E8D36 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		67AB6D1D18C5189F005E8D36 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -153,6 +155,7 @@
 		67AB6D2218C5189F005E8D36 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				07D994631BB21A7E00018198 /* testB.pdf */,
 				8F1FD4EF1AB371FF004184CE /* testA.pdf */,
 				67AB6D2318C5189F005E8D36 /* ILPDFKitSample-Info.plist */,
 				67AB6D2418C5189F005E8D36 /* InfoPlist.strings */,
@@ -309,6 +312,7 @@
 				67AB6D2618C5189F005E8D36 /* InfoPlist.strings in Resources */,
 				67AB6D2E18C5189F005E8D36 /* Images.xcassets in Resources */,
 				8F1FD4F01AB371FF004184CE /* testA.pdf in Resources */,
+				07D994641BB21A7E00018198 /* testB.pdf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

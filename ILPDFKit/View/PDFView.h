@@ -61,6 +61,10 @@
  *  ---------------------------------------------------------------------------------------
  */
 
+- (void)keyboardFrameWillChange:(NSNotification *)notification;
+
+- (void)dealloc;
+
 /** Adds an addition view.
  @param viewToAdd PDFWidgetAnnotationalElementView to be added to the pdfView scrollView.
  */

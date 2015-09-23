@@ -52,7 +52,7 @@
         [_pdfView.scrollView setZoomScale:1];
         [_pdfView.scrollView setContentOffset:CGPointZero];
         //This allows us to prevent the keyboard from obscuring text fields near the botton of the document.
-        [_pdfView.scrollView setContentInset:UIEdgeInsetsMake(0, 0, frame.size.height/2, 0)];
+        [_pdfView.scrollView setContentInset:UIEdgeInsetsMake(0, 0, 0, 0)];
         _pdfWidgetAnnotationViews = [[NSMutableArray alloc] initWithArray:widgetAnnotationViews];
         for (PDFWidgetAnnotationView *element in _pdfWidgetAnnotationViews) {
             element.alpha = 0;
@@ -72,10 +72,38 @@
         UITapGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:nil action:NULL];
         [self addGestureRecognizer:tapGestureRecognizer];
         tapGestureRecognizer.delegate = self;
+        
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardFrameWillChange:) name:UIKeyboardWillChangeFrameNotification object:nil];
     }
     return self;
 }
 
+// Move UIView up when keyboard shows so it doens't block textfields
+- (void)keyboardFrameWillChange:(NSNotification *)notification
+{
+    CGRect keyboardEndFrame = [[[notification userInfo] objectForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue];
+    CGRect keyboardBeginFrame = [[[notification userInfo] objectForKey:UIKeyboardFrameBeginUserInfoKey] CGRectValue];
+    UIViewAnimationCurve animationCurve = [[[notification userInfo] objectForKey:UIKeyboardAnimationCurveUserInfoKey] integerValue];
+    NSTimeInterval animationDuration = [[[notification userInfo] objectForKey:UIKeyboardAnimationDurationUserInfoKey] integerValue];
+    
+    [UIView beginAnimations:nil context:nil];
+    [UIView setAnimationDuration:animationDuration];
+    [UIView setAnimationCurve:animationCurve];
+    
+    CGRect newFrame = _pdfView.frame;
+    CGRect keyboardFrameEnd = [_pdfView convertRect:keyboardEndFrame toView:nil];
+    CGRect keyboardFrameBegin = [_pdfView convertRect:keyboardBeginFrame toView:nil];
+    
+    newFrame.origin.y -= (keyboardFrameBegin.origin.y - keyboardFrameEnd.origin.y);
+    _pdfView.frame = newFrame;
+    
+    [UIView commitAnimations];
+}
+
+- (void)dealloc
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
 
 - (void)addPDFWidgetAnnotationView:(PDFWidgetAnnotationView *)viewToAdd {
     [_pdfWidgetAnnotationViews addObject:viewToAdd];
