@@ -91,6 +91,10 @@ typedef NS_ENUM(NSUInteger, PDFFormType) {
  */
 @property (nonatomic, readonly) PDFFormType formType;
 
+/**
+ The form widget that represents this form element.
+ */
+@property (nonatomic, readonly) PDFWidgetAnnotationView *widget;
 
 /** The crop box for the parent PDF page.
  */

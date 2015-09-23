@@ -35,6 +35,8 @@
     CGFloat _currentFontSize;
 }
 
+@synthesize textFieldOrTextView = _textFieldOrTextView;
+
 #pragma mark - NSObject
 
 - (void)dealloc {
@@ -138,15 +140,23 @@
     CGSize contentSize = CGSizeMake(textView.bounds.size.width-PDFFormMinFontSize, CGFLOAT_MAX);
     float numLines = ceilf((textView.bounds.size.height / textView.font.lineHeight));
     NSString *newString = [textView.text stringByReplacingCharactersInRange:range withString:text];
-    if ([newString length] < [textView.text length])return YES;
+
+    // Early exit if we're deleting characters.
+    if ([newString length] < [textView.text length])
+        return YES;
+    
+    // Otherwise calculate if we can fit any new characters.
     NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle defaultParagraphStyle] mutableCopy];
     paragraphStyle.lineBreakMode = NSLineBreakByWordWrapping;
     CGRect textRect = [newString boundingRectWithSize:contentSize
                                         options:(NSStringDrawingUsesLineFragmentOrigin|NSStringDrawingUsesFontLeading)
                                       attributes:@{NSFontAttributeName:textView.font,NSParagraphStyleAttributeName:paragraphStyle}
                                         context:nil];
+
     float usedLines = ceilf(textRect.size.height/textView.font.lineHeight);
-    if (usedLines >= numLines && usedLines > 1) return NO;
+    if (usedLines >= numLines && usedLines > 1)
+        return NO;
+
     return YES;
 }
 

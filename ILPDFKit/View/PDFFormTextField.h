@@ -29,6 +29,7 @@
  */
 @interface PDFFormTextField : PDFWidgetAnnotationView 
 
+@property(nonatomic, readonly) UIView *textFieldOrTextView;
 
 /**---------------------------------------------------------------------------------------
  * @name Creating a PDFFormTextField

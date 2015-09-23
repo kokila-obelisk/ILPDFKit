@@ -75,6 +75,10 @@ void checkKeys(const char *key,CGPDFObjectRef value,void *info) {
     return [self.nsd hash];
 }
 
+- (NSString*) description {
+    return [self.nsd description];
+}
+
 #pragma mark - PDFDictionary
 
 - (instancetype)initWithDictionary:(CGPDFDictionaryRef)pdict {

@@ -42,6 +42,8 @@
     PDFWidgetAnnotationView *_formUIElement;
 }
 
+@synthesize widget = _formUIElement;
+
 #pragma mark - NSObject
 
 - (void)dealloc {

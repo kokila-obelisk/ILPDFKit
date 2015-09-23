@@ -49,7 +49,8 @@
 #define isODelim(c) ((c) == '(' ||  (c) == '<' ||  (c) == '[')
 #define isCDelim(c) ((c) == ')' ||  (c) == '>' ||  (c) == ']')
 
-#define PDFFormMinFontSize 8
+#define PDFFormDefaultFontSize 18
+#define PDFFormMinFontSize 12
 #define PDFFormMaxFontSize 22
 
 

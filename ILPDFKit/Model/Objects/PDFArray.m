@@ -70,6 +70,10 @@
     return [self.nsa hash];
 }
 
+- (NSString*)description {
+    return [self.nsa description];
+}
+
 #pragma mark - PDFArray
 
 - (instancetype)initWithArray:(CGPDFArrayRef)parr {
