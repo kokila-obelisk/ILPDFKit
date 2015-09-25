@@ -56,7 +56,7 @@
 #pragma mark - PDFViewController
 
 - (instancetype)initWithData:(NSData *)data {
-    self = [super init];
+    self = [super initWithNibName:nil bundle:nil];
     if (self != nil) {
         _document = [[PDFDocument alloc] initWithData:data];
     }
@@ -64,7 +64,7 @@
 }
 
 - (instancetype)initWithResource:(NSString *)name {
-    self = [super init];
+    self = [super initWithNibName:nil bundle:nil];
     if (self != nil) {
         _document = [[PDFDocument alloc] initWithResource:name];
     }
@@ -72,7 +72,7 @@
 }
 
 - (instancetype)initWithPath:(NSString *)path {
-    self = [super init];
+    self = [super initWithNibName:nil bundle:nil];
     if(self != nil) {
         _document = [[PDFDocument alloc] initWithPath:path];
     }

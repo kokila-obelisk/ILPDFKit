@@ -56,14 +56,16 @@
 
 - (instancetype)initWithFrame:(CGRect)frame dataOrPath:(id)dataOrPath additionViews:(NSArray *)widgetAnnotationViews NS_DESIGNATED_INITIALIZER;
 
+/**
+ * Make super designated initializer unavailable.
+ */
+- (instancetype) __unavailable initWithFrame:(CGRect)frame;
+- (instancetype) __unavailable initWithCoder:(NSCoder *)aDecoder;
+
 /**---------------------------------------------------------------------------------------
  * @name Adding and Removing Additions
  *  ---------------------------------------------------------------------------------------
  */
-
-- (void)keyboardFrameWillChange:(NSNotification *)notification;
-
-- (void)dealloc;
 
 /** Adds an addition view.
  @param viewToAdd PDFWidgetAnnotationalElementView to be added to the pdfView scrollView.

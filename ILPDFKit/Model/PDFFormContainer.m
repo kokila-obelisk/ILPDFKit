@@ -203,6 +203,10 @@
     return ret;
 }
 
+- (NSDictionary *) copyNameTree
+{
+    return [_nameTree copy];
+}
 
 #pragma mark - NSFastEnumeration
 

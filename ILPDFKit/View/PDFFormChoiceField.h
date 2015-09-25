@@ -23,6 +23,7 @@
 #import <UIKit/UIKit.h>
 #import "PDFWidgetAnnotationView.h"
 
+NS_ASSUME_NONNULL_BEGIN
 
 /** The PDFFormChoiceField represents a view for a PDF choice field.
  */
@@ -42,4 +43,13 @@
  */
 - (instancetype)initWithFrame:(CGRect)frame options:(NSArray *)opt NS_DESIGNATED_INITIALIZER;
 
+/**
+ * Make designated super initializers unavailable.
+ */
+// - (instancetype) __unavailable init;
+- (instancetype) __unavailable initWithFrame:(CGRect)frame;
+- (nullable instancetype) __unavailable initWithCoder:(NSCoder *)aDecoder;
+
 @end
+
+NS_ASSUME_NONNULL_END

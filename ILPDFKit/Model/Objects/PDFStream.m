@@ -93,9 +93,8 @@
 #pragma mark - Private Initializers
 
 - (instancetype)initWithStreamRef:(CGPDFStreamRef)strm data:(NSData *)data dictionary:(PDFDictionary *)dict format:(CGPDFDataFormat)format representation:(NSString *)representation {
-    self = [self init];
+    self = [self initWithStream:strm];
     if (self != nil) {
-        _strm = strm;
         _data = data;
         _dictionary = dict;
         _dataFormat = format;

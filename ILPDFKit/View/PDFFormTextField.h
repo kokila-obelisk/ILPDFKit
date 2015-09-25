@@ -24,12 +24,13 @@
 #import <UIKit/UIKit.h>
 #import "PDFWidgetAnnotationView.h"
 
+NS_ASSUME_NONNULL_BEGIN
 
 /** The PDFFormTextField represents a view for a PDF text field.
  */
 @interface PDFFormTextField : PDFWidgetAnnotationView 
 
-@property(nonatomic, readonly) UIView *textFieldOrTextView;
+@property(nonatomic, readonly) UIView * textFieldOrTextView;
 
 /**---------------------------------------------------------------------------------------
  * @name Creating a PDFFormTextField
@@ -47,5 +48,13 @@
  */
 - (instancetype)initWithFrame:(CGRect)frame multiline:(BOOL)multiline alignment:(NSTextAlignment)alignment secureEntry:(BOOL)secureEntry readOnly:(BOOL)ro NS_DESIGNATED_INITIALIZER;
 
+/**
+ * Make designated super initializers unavailable.
+ */
+// - (instancetype) __unavailable init;
+- (instancetype) __unavailable initWithFrame:(CGRect)frame;
+- (nullable instancetype) __unavailable initWithCoder:(NSCoder *)aDecoder;
 
 @end
+
+NS_ASSUME_NONNULL_END

@@ -145,7 +145,7 @@
 #pragma mark - Private Initializers
 
 - (instancetype)initWithNSArray:(NSArray *)arr representation:(NSString *)rep cgPDFArray:(CGPDFArrayRef)cgarr {
-    self = [self init];
+    self = [self initWithArray:(__bridge CGPDFArrayRef)arr];
     if (self != nil) {
         _nsa = arr;
         _representation = rep;

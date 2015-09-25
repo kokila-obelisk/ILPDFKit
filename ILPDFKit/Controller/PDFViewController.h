@@ -22,6 +22,8 @@
 
 #import <UIKit/UIKit.h>
 
+NS_ASSUME_NONNULL_BEGIN
+
 /**The PDFViewController class allows for convienient viewing  of a PDF document using a UIViewController subclass. It represents the controller that renders a PDF using its view (PDFView) with data from its model (PDFDocument). Displaying a PDF file is very simple using PDFViewController.
  
         PDFViewController *pdfViewController = [[PDFViewController alloc] initWithResource:@"myPDF.pdf"];
@@ -35,11 +37,11 @@
 
 /** The PDFDocument that represents the model for the PDFViewController
  */
-@property (nonatomic, strong) PDFDocument *document;
+@property (nonatomic, strong) PDFDocument * _Nullable document;
 
 /** The PDFView that represents the view for the PDFViewController
  */
-@property (nonatomic, strong) PDFView *pdfView;
+@property (nonatomic, strong) PDFView * _Nullable pdfView;
 
 
 /**---------------------------------------------------------------------------------------
@@ -69,6 +71,13 @@
  */
 - (instancetype)initWithPath:(NSString *)path NS_DESIGNATED_INITIALIZER;
 
+/**
+ * Make designated super initializers unavailable.
+ */
+- (instancetype) __unavailable init;
+- (instancetype) __unavailable initWithNibName:(nullable NSString *)nibNameOrNil bundle:(nullable NSBundle *)nibBundleOrNil;
+- (nullable instancetype) __unavailable initWithCoder:(NSCoder *)aDecoder;
+
 /**---------------------------------------------------------------------------------------
  * @name Reloading Content
  *  ---------------------------------------------------------------------------------------
@@ -79,3 +88,5 @@
 - (void)reload;
 
 @end
+
+NS_ASSUME_NONNULL_END

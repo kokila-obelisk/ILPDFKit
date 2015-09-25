@@ -22,6 +22,8 @@
 
 #import <Foundation/Foundation.h>
 
+NS_ASSUME_NONNULL_BEGIN
+
 @class PDFWidgetAnnotationView;
 @class PDFView;
 
@@ -51,12 +53,12 @@
 /** The value of the element.
  @discussion If there is an associated PDFForm to the view, then set of values are synced using key value observing.
  */
-@property (nonatomic, strong) NSString *value;
+@property (nonatomic, strong)  NSString * _Nullable value;
 
 /** The options of the element.
  @discussion If there is an associated PDFForm to the view, then set of options are synced using key value observing.
  */
-@property (nonatomic, strong) NSArray *options;
+@property (nonatomic, strong)  NSArray * _Nullable options;
 
 /** The initial frame of the view, without any transformations applied to its superview.
  */
@@ -64,11 +66,11 @@
 
 /** The delegate.
  */
-@property (nonatomic, weak) NSObject<PDFWidgetAnnotationViewDelegate> *delegate;
+@property (nonatomic, weak) NSObject<PDFWidgetAnnotationViewDelegate> * _Nullable delegate;
 
 /** The parent view.
  */
-@property (nonatomic, weak) PDFView *parentView;
+@property (nonatomic, weak) PDFView * _Nullable parentView;
 
 /**---------------------------------------------------------------------------------------
  * @name Updating Metrics
@@ -87,7 +89,7 @@
  @param multiline YES if multiple lines of text are permitted.
  @param choice YES if the field is a choice field.
  */
-+ (CGFloat)fontSizeForRect:(CGRect)rect value:(NSString *)value multiline:(BOOL)multiline choice:(BOOL)choice;
++ (CGFloat)fontSizeForRect:(CGRect)rect value:(NSString * _Nullable)value multiline:(BOOL)multiline choice:(BOOL)choice;
 
 /**---------------------------------------------------------------------------------------
  * @name Updating Data
@@ -106,5 +108,6 @@
 /** Resigns th input focus.
  */
 - (void)resign;
-
 @end
+
+NS_ASSUME_NONNULL_END

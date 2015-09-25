@@ -70,6 +70,11 @@
  */
 - (instancetype)initWithStream:(CGPDFStreamRef)pstrm NS_DESIGNATED_INITIALIZER;
 
+/**
+ * Make default initializer unavailable.
+ */
+- (instancetype) __unavailable init;
+
 /**---------------------------------------------------------------------------------------
  * @name Comparing Streams
  *  ---------------------------------------------------------------------------------------

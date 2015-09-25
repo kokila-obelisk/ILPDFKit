@@ -93,6 +93,11 @@
  */
 - (instancetype)initWithPath:(NSString *)path NS_DESIGNATED_INITIALIZER;
 
+/**
+ * Make default initializer unavailable.
+ */
+- (instancetype) __unavailable init;
+
 /**---------------------------------------------------------------------------------------
  * @name Finding Document Structure
  *  ---------------------------------------------------------------------------------------

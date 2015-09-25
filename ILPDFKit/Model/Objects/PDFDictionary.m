@@ -188,10 +188,9 @@ void checkKeys(const char *key,CGPDFObjectRef value,void *info) {
 
 #pragma mark - Private Initializers
 
-- (instancetype)initWithNSDictionary:(NSDictionary *)dict representation:(NSString *)rep cgPDFDictionary:(CGPDFDictionaryRef)cgdict parent:(PDFDictionary *)parent {
-    self = [self init];
+- (instancetype) initWithNSDictionary:(NSDictionary *)dict representation:(NSString *)rep cgPDFDictionary:(CGPDFDictionaryRef)cgdict parent:(PDFDictionary *)parent {
+    self = [self initWithDictionary:(__bridge CGPDFDictionaryRef)dict];
     if (self != nil) {
-        _nsd = dict;
         _representation = rep;
         _dict = cgdict;
         _parent = parent;

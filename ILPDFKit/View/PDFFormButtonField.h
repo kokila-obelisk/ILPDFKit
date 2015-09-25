@@ -23,6 +23,7 @@
 #import <UIKit/UIKit.h>
 #import "PDFWidgetAnnotationView.h"
 
+NS_ASSUME_NONNULL_BEGIN
 
 /** The PDFFormButtonField represents a view for a PDF button field.
  */
@@ -65,6 +66,13 @@
  */
 - (instancetype)initWithFrame:(CGRect)frame radio:(BOOL)rad NS_DESIGNATED_INITIALIZER;
 
+/**
+ * Make designated super initializers unavailable.
+ */
+// - (instancetype) __unavailable init;
+- (instancetype) __unavailable initWithFrame:(CGRect)frame;
+- (nullable instancetype) __unavailable initWithCoder:(NSCoder *)aDecoder;
+
 /**---------------------------------------------------------------------------------------
  * @name Post Initialization
  *  ---------------------------------------------------------------------------------------
@@ -90,8 +98,6 @@
  */
 + (void)drawWithRect:(CGRect)frame context:(CGContextRef)ctx back:(BOOL)back selected:(BOOL)selected radio:(BOOL)radio;
 
-
-
-
-
 @end
+
+NS_ASSUME_NONNULL_END

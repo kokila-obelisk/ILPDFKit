@@ -65,6 +65,10 @@
  */
 - (PDFDictionary *)dictionaryByMergingDictionary:(NSDictionary *)changes;
 
+/**
+ * Make super designated initializer unavailable.
+ */
+- (instancetype) __unavailable init;
 
 /**---------------------------------------------------------------------------------------
  * @name Accessing Keys and Values

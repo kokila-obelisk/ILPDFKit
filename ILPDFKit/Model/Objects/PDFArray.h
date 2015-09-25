@@ -52,6 +52,11 @@
  */
 - (instancetype)initWithArray:(CGPDFArrayRef)parr NS_DESIGNATED_INITIALIZER;
 
+/**
+ * Make super designated initializer unavailable.
+ */
+- (instancetype) __unavailable init;
+
 /**---------------------------------------------------------------------------------------
  * @name Rectangle Arrays
  *  ---------------------------------------------------------------------------------------

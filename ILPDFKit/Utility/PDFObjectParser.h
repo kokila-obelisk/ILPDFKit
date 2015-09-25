@@ -63,4 +63,9 @@ As an example:
  */
 + (PDFObjectParser *)parserWithBytes:(NSData *)bytes;
 
+/**
+ * Make default initializer unavailable.
+ */
+- (instancetype) __unavailable init;
+
 @end

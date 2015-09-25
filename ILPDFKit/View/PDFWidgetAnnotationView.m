@@ -56,7 +56,7 @@
     self.frame = CGRectMake(_baseFrame.origin.x*zoom,_baseFrame.origin.y*zoom,_baseFrame.size.width*zoom,_baseFrame.size.height*zoom);
 }
 
-+ (CGFloat)fontSizeForRect:(CGRect)rect value:(NSString *)value multiline:(BOOL)multiline choice:(BOOL)choice {
++ (CGFloat)fontSizeForRect:(CGRect)rect value:(nullable NSString *)value multiline:(BOOL)multiline choice:(BOOL)choice {
     if (multiline) return PDFFormDefaultFontSize;
     CGFloat baseSize;
     if (choice) baseSize = roundf(MIN(MAX(floorf(rect.size.height*PDFChoiceFieldBaseFontSizeToFrameHeightScaleFactor),PDFFormMinFontSize),PDFFormMaxFontSize));
@@ -69,7 +69,7 @@
     } else return baseSize;
 }
 
-- (void)setValue:(NSString *)value {
+- (void)setValue:(nullable NSString *)value {
 }
 
 - (NSString *)value {

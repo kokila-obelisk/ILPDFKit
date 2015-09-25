@@ -44,6 +44,11 @@
  */
 - (instancetype)initWithParentDocument:(PDFDocument *)parent NS_DESIGNATED_INITIALIZER;
 
+/**
+ * Make super designated initializer unavailable.
+ */
+- (instancetype) __unavailable init;
+
 /**---------------------------------------------------------------------------------------
  * @name Retrieving Forms
  *  ---------------------------------------------------------------------------------------
@@ -121,6 +126,17 @@
  @return The xml string defining the value and hierarchical structure of all forms in the document.
  */
 - (NSString *)formXML;
+
+/**---------------------------------------------------------------------------------------
+ * @name Dictionary
+ *  ---------------------------------------------------------------------------------------
+ */
+
+/**
+ Returns a copy of all key value pairs of the pdf form fields
+ @return NSDictionary defining the key and array of values of all the pdf forms in the document.
+ */
+- (NSDictionary *) copyNameTree;
 
 
 @end
