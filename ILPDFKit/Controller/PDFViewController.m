@@ -79,6 +79,14 @@
     return self;
 }
 
+- (nullable instancetype) initWithCoder:(NSCoder *)aDecoder {
+    self = [super initWithCoder:aDecoder];
+    if(self != nil) {
+    }
+    return self;
+}
+
+
 - (void)reload {
     [_document refresh];
     [_pdfView removeFromSuperview];

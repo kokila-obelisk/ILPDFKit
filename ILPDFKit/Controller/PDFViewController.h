@@ -71,12 +71,16 @@ NS_ASSUME_NONNULL_BEGIN
  */
 - (instancetype)initWithPath:(NSString *)path NS_DESIGNATED_INITIALIZER;
 
+/** Initialize from coded NIB
+ @param user Dictionary value "pdf_resource" will load the named resource document.
+ */
+- (nullable instancetype) initWithCoder:(NSCoder *)aDecoder NS_DESIGNATED_INITIALIZER;
+
 /**
  * Make designated super initializers unavailable.
  */
 - (instancetype) __unavailable init;
 - (instancetype) __unavailable initWithNibName:(nullable NSString *)nibNameOrNil bundle:(nullable NSBundle *)nibBundleOrNil;
-- (nullable instancetype) __unavailable initWithCoder:(NSCoder *)aDecoder;
 
 /**---------------------------------------------------------------------------------------
  * @name Reloading Content
