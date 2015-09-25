@@ -1,4 +1,3 @@
-
 Pod::Spec.new do |s|
 
 s.name         = "ILPDFKit"
@@ -14,7 +13,8 @@ s.source  = { :git => "https://github.com/conquermobile/ILPDFKit.git", :tag => "
 s.source_files  = "ILPDFKit/**/*.{h,m}"
 s.frameworks = "QuartzCore", "UIKit"
 s.requires_arc = true
-s.dependency = { :git => "https://github.com/conquermobile/SJCSimplePDFView.git", :branch => "master" }
 s.documentation_url = 'http://ilpdfkit.com/index.html'
+s.dependency 'SJCSimplePDFView'
+#, :git => "https://github.com/conquermobile/SJCSimplePDFView.git", :tag => "1.0.0"
 
 end
