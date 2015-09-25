@@ -21,6 +21,7 @@
 // THE SOFTWARE.
 
 #import <UIKit/UIKit.h>
+#import <SJCSimplePDFView/SJCSimplePDFView.h>
 
 @class PDFWidgetAnnotationView;
 
@@ -37,9 +38,9 @@
  */
 @property (nonatomic, weak) PDFWidgetAnnotationView *activeWidgetAnnotationView;
 
-/** The webview used to render the PDF.
+/** The simple viewer used to render the PDF.
  */
-@property (nonatomic, readonly) UIWebView *pdfView;
+@property (nonatomic, readonly) SJCSimplePDFView *pdfView;
 
 
 /**---------------------------------------------------------------------------------------

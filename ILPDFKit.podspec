@@ -14,6 +14,7 @@ s.source  = { :git => "https://github.com/iwelabs/ILPDFKit.git", :tag => "0.1.1"
 s.source_files  = "ILPDFKit/**/*.{h,m}"
 s.frameworks = "QuartzCore", "UIKit"
 s.requires_arc = true
+s.dependency = { :git => "https://github.com/conquermobile/SJCSimplePDFView.git", :branch => "master" }
 s.documentation_url = 'http://ilpdfkit.com/index.html'
 
 end

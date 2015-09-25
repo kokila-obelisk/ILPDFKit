@@ -106,14 +106,15 @@
 
 - (CGPoint)getMargins {
     
-    static const float PDFLandscapePadWMargin = 13.0f;
-    static const float PDFLandscapePadHMargin = 7.25f;
-    static const float PDFPortraitPadWMargin = 9.0f;
-    static const float PDFPortraitPadHMargin = 6.10f;
-    static const float PDFPortraitPhoneWMargin = 3.5f;
-    static const float PDFPortraitPhoneHMargin = 6.7f;
-    static const float PDFLandscapePhoneWMargin = 6.8f;
-    static const float PDFLandscapePhoneHMargin = 6.5f;
+    // AH: Removed margines, because the new SJSimplePDFView is much more derministic with its margines (configured to be zero)
+    static const float PDFLandscapePadWMargin = 0; // 13.0f;
+    static const float PDFLandscapePadHMargin = 0; // 7.25f;
+    static const float PDFPortraitPadWMargin = 0; // 9.0f;
+    static const float PDFPortraitPadHMargin = 0;  // 6.10f;
+    static const float PDFPortraitPhoneWMargin = 0; //3.5f;
+    static const float PDFPortraitPhoneHMargin = 0; // 6.7f;
+    static const float PDFLandscapePhoneWMargin = 0; // 6.8f;
+    static const float PDFLandscapePhoneHMargin = 0; // 6.5f;
     
     if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
         if (UIInterfaceOrientationIsPortrait(self.interfaceOrientation))return CGPointMake(PDFPortraitPadWMargin,PDFPortraitPadHMargin);

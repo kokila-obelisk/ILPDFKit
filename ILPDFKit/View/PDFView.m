@@ -41,35 +41,39 @@
     self = [super initWithFrame:frame];
     if (self) {
         CGRect contentFrame = CGRectMake(0, 0, frame.size.width, frame.size.height);
-        _pdfView = [[UIWebView alloc] initWithFrame:contentFrame];
-        _pdfView.scalesPageToFit = YES;
-        _pdfView.scrollView.delegate = self;
-        _pdfView.scrollView.bouncesZoom = NO;
-        _pdfView.delegate = self;
+        _pdfView = [[SJCSimplePDFView alloc] initWithFrame:contentFrame];
+        _pdfView.viewMode = kSJCPDFViewModeContinuous;
+//        _pdfView.delegate = self;
+        _pdfView.bouncesZoom = NO;
         _pdfView.autoresizingMask =  UIViewAutoresizingFlexibleHeight|UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleTopMargin|UIViewAutoresizingFlexibleLeftMargin;
          self.autoresizingMask =  UIViewAutoresizingFlexibleHeight|UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleTopMargin|UIViewAutoresizingFlexibleLeftMargin;
         [self addSubview:_pdfView];
-        [_pdfView.scrollView setZoomScale:1];
-        _pdfView.scrollView.maximumZoomScale = 1;
-        _pdfView.scrollView.minimumZoomScale = 1;
-        [_pdfView.scrollView setContentOffset:CGPointZero];
+        CGFloat zoomScale = 1;
+        [_pdfView setZoomScale:zoomScale];
+        _pdfView.maximumZoomScale = zoomScale;
+        _pdfView.minimumZoomScale = zoomScale;
+        [_pdfView setContentOffset:CGPointZero];
         //This allows us to prevent the keyboard from obscuring text fields near the botton of the document.
-        [_pdfView.scrollView setContentInset:UIEdgeInsetsMake(0, 0, 0, 0)];
+        [_pdfView setContentInset:UIEdgeInsetsMake(0, 0, 0, 0)];
         _pdfWidgetAnnotationViews = [[NSMutableArray alloc] initWithArray:widgetAnnotationViews];
         for (PDFWidgetAnnotationView *element in _pdfWidgetAnnotationViews) {
             element.alpha = 0;
             element.parentView = self;
-            [_pdfView.scrollView addSubview:element];
+            [_pdfView addSubview:element];
             if ([element isKindOfClass:[PDFFormButtonField class]]) {
                 [(PDFFormButtonField*)element setButtonSuperview];
             }
         }
         
         if ([dataOrPath isKindOfClass:[NSString class]]) {
-            [_pdfView loadRequest:[NSURLRequest requestWithURL:[NSURL fileURLWithPath:dataOrPath]]];
+            _pdfView.PDFFileURL = [NSURL fileURLWithPath:dataOrPath];
+//            [_pdfView loadRequest:[NSURLRequest requestWithURL:[NSURL fileURLWithPath:dataOrPath]]];
         } else if([dataOrPath isKindOfClass:[NSData class]]) {
-            [_pdfView loadData:dataOrPath MIMEType:@"application/pdf" textEncodingName:@"NSASCIIStringEncoding" baseURL:[NSURL new]];
+            _pdfView.PDFData = dataOrPath;
+//            [_pdfView loadData:dataOrPath MIMEType:@"application/pdf" textEncodingName:@"NSASCIIStringEncoding" baseURL:[NSURL new]];
         }
+
+        [self fadeInWidgetAnnotations];
 
         UITapGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:nil action:NULL];
         [self addGestureRecognizer:tapGestureRecognizer];
@@ -89,8 +93,8 @@
 - (void)keyboardDidShow:(NSNotification*) notification {
     CGSize keyboardSize = [[[notification userInfo] objectForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue].size;
     UIEdgeInsets insets = UIEdgeInsetsMake(0, 0, keyboardSize.height, 0);
-    [_pdfView.scrollView setContentInset:insets];
-    [_pdfView.scrollView setScrollIndicatorInsets:insets];
+    [_pdfView setContentInset:insets];
+    [_pdfView setScrollIndicatorInsets:insets];
     [self scrollActiveWidgetToVisible];
 }
 
@@ -100,8 +104,8 @@
 */
 - (void)keyboardDidHide:(NSNotification*) notification {
     UIEdgeInsets insets = UIEdgeInsetsZero;
-    [_pdfView.scrollView setContentInset:insets];
-    [_pdfView.scrollView setScrollIndicatorInsets:insets];
+    [_pdfView setContentInset:insets];
+    [_pdfView setScrollIndicatorInsets:insets];
     [self scrollActiveWidgetToVisible];
 }
 
@@ -118,8 +122,8 @@
  */
 - (void) scrollActiveWidgetToVisible {
     if( _activeWidgetAnnotationView ) {
-        CGRect widgetRect = [_pdfView.scrollView convertRect:_activeWidgetAnnotationView.bounds fromView:_activeWidgetAnnotationView];
-        [_pdfView.scrollView scrollRectToVisible:widgetRect animated:YES];
+        CGRect widgetRect = [_pdfView convertRect:_activeWidgetAnnotationView.bounds fromView:_activeWidgetAnnotationView];
+        [_pdfView scrollRectToVisible:widgetRect animated:YES];
     }
 }
 
@@ -131,7 +135,7 @@
 
 - (void)addPDFWidgetAnnotationView:(PDFWidgetAnnotationView *)viewToAdd {
     [_pdfWidgetAnnotationViews addObject:viewToAdd];
-    [_pdfView.scrollView addSubview:viewToAdd];
+    [_pdfView addSubview:viewToAdd];
 }
 
 - (void)removePDFWidgetAnnotationView:(PDFWidgetAnnotationView *)viewToRemove {
@@ -146,7 +150,7 @@
     for (PDFWidgetAnnotationView *element in _pdfWidgetAnnotationViews) {
         element.alpha = 0;
         element.parentView = self;
-        [_pdfView.scrollView addSubview:element];
+        [_pdfView addSubview:element];
         if ([element isKindOfClass:[PDFFormButtonField class]]) {
             [(PDFFormButtonField*)element setButtonSuperview];
         }
@@ -154,14 +158,14 @@
     if (_canvasLoaded) [self fadeInWidgetAnnotations];
 }
 
-#pragma mark - UIWebViewDelegate
-
-- (void)webViewDidFinishLoad:(UIWebView *)webView {
-    _canvasLoaded = YES;
-    if (_pdfWidgetAnnotationViews) {
-        [self fadeInWidgetAnnotations];
-    }
-}
+//#pragma mark - UIWebViewDelegate
+//
+//- (void)webViewDidFinishLoad:(UIWebView *)webView {
+//    _canvasLoaded = YES;
+//    if (_pdfWidgetAnnotationViews) {
+//        [self fadeInWidgetAnnotations];
+//    }
+//}
 
 #pragma mark - UIScrollViewDelegate
 
@@ -184,7 +188,7 @@
 
 - (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch {
     if (_activeWidgetAnnotationView == nil) return NO;
-    if (!CGRectContainsPoint(_activeWidgetAnnotationView.frame, [touch locationInView:_pdfView.scrollView])) {
+    if (!CGRectContainsPoint(_activeWidgetAnnotationView.frame, [touch locationInView:_pdfView])) {
         if ([_activeWidgetAnnotationView isKindOfClass:[UITextView class]]) {
             [_activeWidgetAnnotationView resignFirstResponder];
         } else {

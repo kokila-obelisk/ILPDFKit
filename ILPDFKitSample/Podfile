@@ -1,0 +1,3 @@
+platform :ios, :deployment_target => '8.0'
+
+pod 'SJCSimplePDFView', :git => "https://github.com/conquermobile/SJCSimplePDFView.git", :branch => "master"
