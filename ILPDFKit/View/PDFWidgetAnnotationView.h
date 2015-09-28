@@ -24,24 +24,29 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+@class PDFFormChoiceField;
 @class PDFWidgetAnnotationView;
 @class PDFView;
 
 /** The PDFWidgetAnnotationViewDelegate responds to user interaction with a PDFWidgetAnnotationView.
  */
 @protocol PDFWidgetAnnotationViewDelegate <NSObject>
+
 /** Called when the value changes.
  @param sender The sending PDFWidgetAnnotationView.
  */
 - (void)widgetAnnotationValueChanged:(PDFWidgetAnnotationView *)sender;
+
 /** Called when the the element is focused or expanded.
  @param sender The sending PDFWidgetAnnotationView.
  */
 - (void)widgetAnnotationEntered:(PDFWidgetAnnotationView *)sender;
+
 /** Called when the options changes for choice field views.
  @param sender The sending PDFWidgetAnnotationView.
  */
 - (void)widgetAnnotationOptionsChanged:(PDFWidgetAnnotationView *)sender;
+
 @end
 
 /** The PDFWidgetAnnotationView represents a subview of a PDFView that represents an interactive or accessory element. A PDFForm is an example.

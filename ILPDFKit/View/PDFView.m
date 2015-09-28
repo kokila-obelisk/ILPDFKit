@@ -43,7 +43,7 @@
         CGRect contentFrame = CGRectMake(0, 0, frame.size.width, frame.size.height);
         _pdfView = [[SJCSimplePDFView alloc] initWithFrame:contentFrame];
         _pdfView.viewMode = kSJCPDFViewModeContinuous;
-//        _pdfView.delegate = self;
+        _pdfView.delegate = self;
         _pdfView.bouncesZoom = NO;
         _pdfView.autoresizingMask =  UIViewAutoresizingFlexibleHeight|UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleTopMargin|UIViewAutoresizingFlexibleLeftMargin;
          self.autoresizingMask =  UIViewAutoresizingFlexibleHeight|UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleTopMargin|UIViewAutoresizingFlexibleLeftMargin;

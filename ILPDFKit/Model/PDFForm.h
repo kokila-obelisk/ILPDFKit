@@ -60,7 +60,15 @@ typedef NS_ENUM(NSUInteger, PDFFormType) {
 @class PDFDictionary;
 @class PDFWidgetAnnotationView;
 
-/** The PDFForm class represents a Widget Annotation owned by an interactive PDF form corresponding to a Field Dictionary contained in the 'Fields' array of the document's 'AcroForm' dictionary. Thus each instance of PDFForm represents a unique rectangle on the PDF document where user interaction is permitted, whether through pressing or typing text. A 'Field' is a collection of PDFForm with the same name. All forms in a field have the same value. A 'Field' represents a coherent group of forms that work together to present and collect a common unified piece of information. For example a field may consist of the two button forms named 'Sex' and marked 'Male' and 'Female' respectively to collect the information of a person's gender. A form can create a UIView representation of itself that can respond to user interaction.
+/** The PDFForm class represents a Widget Annotation owned by an interactive PDF form corresponding
+ to a Field Dictionary contained in the 'Fields' array of the document's 'AcroForm' dictionary.
+ Thus each instance of PDFForm represents a unique rectangle on the PDF document where user interaction
+ is permitted, whether through pressing or typing text. A 'Field' is a collection of PDFForm with the
+ same name. All forms in a field have the same value. A 'Field' represents a coherent group of forms 
+ that work together to present and collect a common unified piece of information. For example a field
+ may consist of the two button forms named 'Sex' and marked 'Male' and 'Female' respectively to collect
+ the information of a person's gender. A form can create a UIView representation of itself that can
+ respond to user interaction.
  
  PDFChoiceField* comboBox = [comboBoxTypeForm createWidgetAnnotationViewForSuperviewWithWidth:webView.bounds.size.width  Margin:9.5];
  [webView.scrollView addSubview comboBox];
@@ -111,7 +119,7 @@ typedef NS_ENUM(NSUInteger, PDFFormType) {
 @property (nonatomic, strong, readonly) NSString *name;
 
 
-/** The name of the field shown to the user
+/** The name of the field shown to the user (aka tooltip)
  */
 @property (nonatomic, strong, readonly) NSString *uname;
 
@@ -148,6 +156,13 @@ typedef NS_ENUM(NSUInteger, PDFFormType) {
 /** For choice fields only, the options of the combo box.
  */
 @property (nonatomic, strong) NSArray *options;
+
+/** For Choice and Text fields, the default appearance sets the font, size, and colour.
+ */
+@property (nonatomic, readonly) NSString *defaultAppearance;
+@property (nonatomic, readonly) UIColor *daColor;
+@property (nonatomic, readonly) CGFloat daSize;
+@property (nonatomic, readonly) UIFont *daFont;
 
 /** The intended text alignemnt for text in the form.
  */

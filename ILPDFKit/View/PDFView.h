@@ -21,9 +21,17 @@
 // THE SOFTWARE.
 
 #import <UIKit/UIKit.h>
-#import <SJCSimplePDFView/SJCSimplePDFView.h>
+#import "SJCSimplePDFView.h"
 
 @class PDFWidgetAnnotationView;
+@class PDFFormChoiceField;
+@class PDFView;
+
+@protocol PDFViewDelegate <NSObject>
+
+- (void) pdfView:(PDFView*)view withForm:(PDFForm*)form choiceFieldWasHit:(PDFFormChoiceField*)field;
+
+@end
 
 /** The PDFView class allows for viewing a PDF file. The controller PDFViewController uses PDFView as its view and PDFDocument as its model.
  PDFView is typically not directly instantiated, but instead is used as the instance that comes with PDFViewController.
@@ -42,6 +50,9 @@
  */
 @property (nonatomic, readonly) SJCSimplePDFView *pdfView;
 
+/** Delegate handler for form interactions at the PDFViewController level (an iOS 8/9 thing)
+ */
+@property (nonatomic, weak) id<PDFViewDelegate> delegate;
 
 /**---------------------------------------------------------------------------------------
  * @name Creating a PDFView

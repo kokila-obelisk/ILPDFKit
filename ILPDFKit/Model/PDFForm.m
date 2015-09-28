@@ -65,9 +65,54 @@
         for (PDFString *obj in [[leaf parentValuesForKey:@"T"] reverseObjectEnumerator]) [nameComponents addObject:[obj textString]];
         _name = [nameComponents componentsJoinedByString:@"."];
         NSString *formTypeString = [leaf inheritableValueForKey:@"FT"];
-        _uname = [[leaf inheritableValueForKey:@"TU"] textString];
+        _uname = [[leaf inheritableValueForKey:@"TU"] textString]; // Tooltip text
         _flags = [[leaf inheritableValueForKey:@"Ff"] unsignedIntegerValue];
+
+        _defaultAppearance = [[leaf inheritableValueForKey:@"DA"] textString];
+        if(_defaultAppearance) {
+            // Pattern match an example DA string: "/Helv 12 Tf 0 g"
+            NSString *helvPrefix = @"/Helv ";
+            if( [_defaultAppearance hasPrefix:helvPrefix] ) {
+                NSString *helvSizeStr = [_defaultAppearance substringFromIndex:helvPrefix.length];
+                float helvSize = helvSizeStr.floatValue;
+                _daSize = helvSize;
+                _daFont = [UIFont fontWithName:@"HelveticaNeue" size:_daSize];
+                _daColor = [UIColor blackColor]; // FIXME: Parse out the grey scale value
+            } else {
+                _daSize = PDFFormDefaultFontSize;
+                _daFont = [UIFont fontWithName:@"HelveticaNeue" size:_daSize];
+                _daColor = [UIColor blackColor];
+            }
+            
+//            NSRegularExpression *re = [NSRegularExpression regularExpressionWithPattern:@"/(\\w+) (\\d+) Tf (\\d+) g" options:0 error:nil];
+//            NSArray<NSTextCheckingResult *> *matches = [re matchesInString:_defaultAppearance options:0 range:NSRangeFromString(_defaultAppearance)];
+//            if( matches.count == 3 ) {
+//                NSString *fontSize = [_defaultAppearance substringWithRange:matches[1].range];
+//                if( fontSize ) {
+//                    _daSize = fontSize.floatValue;
+//                } else {
+//                    _daSize = PDFFormDefaultFontSize;
+//                }
+//                
+//                NSString *fontName = [_defaultAppearance substringWithRange:matches[0].range];
+//                if( [fontName isEqualToString:@"Helv"] && fontSize ) {
+//                    _daSize = fontSize.floatValue;
+//                    // Upgrading Adobe's default Helv to HelveticaNeue
+//                    _daFont = [UIFont fontWithName:@"HelveticaNeue" size:fontSize.floatValue];
+//                } else {
+//                    // FIXME: Eventually we'll wan to parse more fonts.
+//                    _daFont = [UIFont fontWithName:@"HelveticaNeue" size:fontSize.floatValue];
+//                }
+//                
+//                float greyLevel = [_defaultAppearance substringWithRange:matches[2].range].floatValue;
+//                _daColor = [UIColor colorWithWhite:greyLevel alpha:1];
+//            }
+        }
+
         NSNumber *formTextAlignment = [leaf  inheritableValueForKey:@"Q"];
+        if (formTextAlignment) {
+            _textAlignment = [formTextAlignment unsignedIntegerValue];
+        }
         _exportValue = [self getExportValueFrom:leaf];
         _setAppearanceStream = [self getSetAppearanceStreamFromLeaf:leaf];
         PDFArray *arr = [leaf inheritableValueForKey:@"Opt"];
@@ -90,7 +135,7 @@
         } else if([formTypeString isEqualToString:@"Sig"]) {
             _formType = PDFFormTypeSignature;
         }
-        
+
         NSMutableArray *tempRect = [NSMutableArray array];
         for (NSNumber *num in leaf[@"Rect"]) [tempRect addObject:num];
         _rawRect = [NSArray arrayWithArray:tempRect];
@@ -100,9 +145,6 @@
         _cropBox =  pg.cropBox;
         if (leaf[@"F"]) {
             _annotFlags = [leaf[@"F"] unsignedIntegerValue];
-        }
-        if (formTextAlignment) {
-            _textAlignment = [formTextAlignment unsignedIntegerValue];
         }
         [self updateFlagsString];
         _parent = p;
@@ -353,6 +395,10 @@
 
 - (void)widgetAnnotationOptionsChanged:(PDFWidgetAnnotationView *)sender {
     self.options = ((PDFWidgetAnnotationView *)sender).options;
+}
+
+- (void)widgetAnnotationBeganChoice:(PDFWidgetAnnotationView *)sender {
+    
 }
 
 #pragma mark - Private

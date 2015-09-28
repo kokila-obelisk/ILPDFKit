@@ -53,8 +53,9 @@
     NSArray *_options;
     NSUInteger _selectedIndex;
     UILabel *_selection;
+    UIButton *_middleButton;
     BOOL _dropped;
-    PDFFormChoiceFieldDropIndicator *_dropIndicator;
+//    PDFFormChoiceFieldDropIndicator *_dropIndicator;
     CGFloat _baseFontHeight;
 }
 
@@ -83,19 +84,25 @@
         _selection.opaque = NO;
         _selection.adjustsFontSizeToFitWidth = YES;
         [_selection setBackgroundColor:[UIColor clearColor]];
-        [_selection setTextColor:[UIColor blackColor]];
-        [_selection setFont:[UIFont systemFontOfSize:_baseFontHeight]];
+        PDFForm* form = (PDFForm*)self.delegate;
+        if(form.defaultAppearance) {
+            [_selection setTextColor:form.daColor];
+            [_selection setFont:form.daFont];
+        } else {
+            [_selection setTextColor:[UIColor blackColor]];
+            [_selection setFont:[UIFont systemFontOfSize:_baseFontHeight]];
+        }
         [self addSubview:_selection];
-        _dropIndicator = [[PDFFormChoiceFieldDropIndicator alloc] initWithFrame:CGRectMake(frame.size.width-frame.size.height*1.5, -frame.size.height*0.25, frame.size.height*1.5, frame.size.height*1.5)];
-        [_dropIndicator setOpaque:NO];
-        [_dropIndicator setBackgroundColor:[UIColor clearColor]];
-        [self addSubview:_dropIndicator];
-        UIButton *middleButton = [[UIButton alloc] initWithFrame:self.bounds];
-        middleButton.opaque = NO;
-        middleButton.autoresizingMask = UIViewAutoresizingFlexibleHeight|UIViewAutoresizingFlexibleWidth;
-        middleButton.backgroundColor = [UIColor clearColor];
-        [middleButton addTarget:self action:@selector(dropButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
-        [self addSubview:middleButton];
+//        _dropIndicator = [[PDFFormChoiceFieldDropIndicator alloc] initWithFrame:CGRectMake(frame.size.width-frame.size.height*1.5, -frame.size.height*0.25, frame.size.height*1.5, frame.size.height*1.5)];
+//        [_dropIndicator setOpaque:NO];
+//        [_dropIndicator setBackgroundColor:[UIColor clearColor]];
+//        [self addSubview:_dropIndicator];
+        _middleButton = [[UIButton alloc] initWithFrame:self.bounds];
+        _middleButton.opaque = NO;
+        _middleButton.autoresizingMask = UIViewAutoresizingFlexibleHeight|UIViewAutoresizingFlexibleWidth;
+        _middleButton.backgroundColor = [UIColor clearColor];
+        [_middleButton addTarget:self action:@selector(dropButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
+        [self addSubview:_middleButton];
         [self addSubview:_tv];
     }
     return self;
@@ -147,16 +154,16 @@
 }
 
 - (void)resign {
-    if (_dropped) [self dropButtonPressed:_dropIndicator];
+//    if (_dropped) [self dropButtonPressed:_dropIndicator];
 }
 
 - (void)updateWithZoom:(CGFloat)zoom {
     [super updateWithZoom:zoom];
-    _dropIndicator.frame = CGRectMake(self.frame.size.width-self.frame.size.height*1.5, -self.frame.size.height*0.25, self.frame.size.height*1.5, self.frame.size.height*1.5);
+//    _dropIndicator.frame = CGRectMake(self.frame.size.width-self.frame.size.height*1.5, -self.frame.size.height*0.25, self.frame.size.height*1.5, self.frame.size.height*1.5);
     _selection.frame  = CGRectMake(1, 0, self.frame.size.width-self.frame.size.height, self.frame.size.height);
     [_selection setFont:[UIFont systemFontOfSize:_baseFontHeight*zoom]];
-    _dropIndicator.transform = CGAffineTransformMakeRotation(0);
-    [_dropIndicator setNeedsDisplay];
+//    _dropIndicator.transform = CGAffineTransformMakeRotation(0);
+//    [_dropIndicator setNeedsDisplay];
     _tv.alpha = 0;
     _tv.frame = CGRectMake(0, self.frame.size.height, self.frame.size.width, self.frame.size.height*PDFChoiceFieldRowHeightDivisor);
     [self setNeedsDisplay];
@@ -203,32 +210,34 @@
 #pragma mark - Responder
 
 - (void)dropButtonPressed:(id)sender {
-    if (!_dropped) {
-        [self.delegate widgetAnnotationEntered:self];
-    }
-    _dropped = !_dropped;
-    [_dropIndicator setNeedsDisplay];
-    if (_dropped) {
-        self.parentView.activeWidgetAnnotationView = self;
-        [_tv reloadData];
-        if (_selectedIndex < [_options count]) {
-            [_tv selectRowAtIndexPath:[NSIndexPath indexPathForRow:_selectedIndex inSection:0] animated:NO scrollPosition:UITableViewScrollPositionNone];
-            [_tv scrollToNearestSelectedRowAtScrollPosition:UITableViewScrollPositionMiddle animated:NO];
-        }
-        [UIView animateWithDuration:0.3 animations:^{
-        self.frame = CGRectMake(self.frame.origin.x,self.frame.origin.y,self.frame.size.width,self.frame.size.height*(PDFChoiceFieldRowHeightDivisor+1));
-        _tv.alpha = 1.0f;
-            _dropIndicator.transform = CGAffineTransformMakeRotation(M_PI/2);
-        } completion:^(BOOL d){}];
-    } else {
-        self.parentView.activeWidgetAnnotationView = nil;
-        [UIView animateWithDuration:0.3 animations:^{
-            _tv.alpha = 0;
-            self.frame = CGRectMake(self.frame.origin.x,self.frame.origin.y,self.frame.size.width,self.frame.size.height/(PDFChoiceFieldRowHeightDivisor+1));
-            _dropIndicator.transform = CGAffineTransformMakeRotation(0);
-        } completion:^(BOOL d){}];
-    }
-    [self setNeedsDisplay];
+    [self.parentView.delegate pdfView:self.parentView withForm:(PDFForm*)self.delegate choiceFieldWasHit:self];
+
+//    if (!_dropped) {
+//        [self.delegate widgetAnnotationEntered:self];
+//    }
+//    _dropped = !_dropped;
+//    [_dropIndicator setNeedsDisplay];
+//    if (_dropped) {
+//        self.parentView.activeWidgetAnnotationView = self;
+//        [_tv reloadData];
+//        if (_selectedIndex < [_options count]) {
+//            [_tv selectRowAtIndexPath:[NSIndexPath indexPathForRow:_selectedIndex inSection:0] animated:NO scrollPosition:UITableViewScrollPositionNone];
+//            [_tv scrollToNearestSelectedRowAtScrollPosition:UITableViewScrollPositionMiddle animated:NO];
+//        }
+//        [UIView animateWithDuration:0.3 animations:^{
+//        self.frame = CGRectMake(self.frame.origin.x,self.frame.origin.y,self.frame.size.width,self.frame.size.height*(PDFChoiceFieldRowHeightDivisor+1));
+//        _tv.alpha = 1.0f;
+//            _dropIndicator.transform = CGAffineTransformMakeRotation(M_PI/2);
+//        } completion:^(BOOL d){}];
+//    } else {
+//        self.parentView.activeWidgetAnnotationView = nil;
+//        [UIView animateWithDuration:0.3 animations:^{
+//            _tv.alpha = 0;
+//            self.frame = CGRectMake(self.frame.origin.x,self.frame.origin.y,self.frame.size.width,self.frame.size.height/(PDFChoiceFieldRowHeightDivisor+1));
+//            _dropIndicator.transform = CGAffineTransformMakeRotation(0);
+//        } completion:^(BOOL d){}];
+//    }
+//    [self setNeedsDisplay];
 }
 
 

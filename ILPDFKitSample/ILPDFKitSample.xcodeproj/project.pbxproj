@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		07D994641BB21A7E00018198 /* testB.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 07D994631BB21A7E00018198 /* testB.pdf */; settings = {ASSET_TAGS = (); }; };
+		2C1ED7721BB8C8CE00CBFADC /* PDFChoiceTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C1ED7711BB8C8CE00CBFADC /* PDFChoiceTableViewController.m */; settings = {ASSET_TAGS = (); }; };
+		2CDDAB2D1BB8C10800A2A595 /* SJCSimplePDFView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CDDAB2A1BB8C10800A2A595 /* SJCSimplePDFView.m */; settings = {ASSET_TAGS = (); }; };
 		67AB6D1C18C5189F005E8D36 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 67AB6D1B18C5189F005E8D36 /* Foundation.framework */; };
 		67AB6D1E18C5189F005E8D36 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 67AB6D1D18C5189F005E8D36 /* CoreGraphics.framework */; };
 		67AB6D2018C5189F005E8D36 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 67AB6D1F18C5189F005E8D36 /* UIKit.framework */; };
@@ -37,12 +39,16 @@
 		8F7AB4DE1AA0AA94008C2AA3 /* PDFNumber.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F7AB4D41AA0AA94008C2AA3 /* PDFNumber.m */; };
 		8F7AB4DF1AA0AA94008C2AA3 /* PDFStream.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F7AB4D71AA0AA94008C2AA3 /* PDFStream.m */; };
 		8F7AB4E01AA0AA94008C2AA3 /* PDFString.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F7AB4D91AA0AA94008C2AA3 /* PDFString.m */; };
-		D4ADEF08F0406E27C12B5D8D /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4F60F856C0B7128EE2310143 /* libPods.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		07D994631BB21A7E00018198 /* testB.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = testB.pdf; sourceTree = "<group>"; };
-		0FCDA9446D9B1CC7A5F5FCB4 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
+		2C1ED7701BB8C8CE00CBFADC /* PDFChoiceTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PDFChoiceTableViewController.h; sourceTree = "<group>"; };
+		2C1ED7711BB8C8CE00CBFADC /* PDFChoiceTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PDFChoiceTableViewController.m; sourceTree = "<group>"; };
+		2CDDAB271BB8C10800A2A595 /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
+		2CDDAB281BB8C10800A2A595 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		2CDDAB291BB8C10800A2A595 /* SJCSimplePDFView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SJCSimplePDFView.h; sourceTree = "<group>"; };
+		2CDDAB2A1BB8C10800A2A595 /* SJCSimplePDFView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SJCSimplePDFView.m; sourceTree = "<group>"; };
 		4F60F856C0B7128EE2310143 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		67AB6D1818C5189F005E8D36 /* ILPDFKitSample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ILPDFKitSample.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		67AB6D1B18C5189F005E8D36 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -100,7 +106,6 @@
 		8F7AB4D71AA0AA94008C2AA3 /* PDFStream.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PDFStream.m; sourceTree = "<group>"; };
 		8F7AB4D81AA0AA94008C2AA3 /* PDFString.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PDFString.h; sourceTree = "<group>"; };
 		8F7AB4D91AA0AA94008C2AA3 /* PDFString.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PDFString.m; sourceTree = "<group>"; };
-		CFBACA32F7CDA16E05D75150 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -111,13 +116,31 @@
 				67AB6D1E18C5189F005E8D36 /* CoreGraphics.framework in Frameworks */,
 				67AB6D2018C5189F005E8D36 /* UIKit.framework in Frameworks */,
 				67AB6D1C18C5189F005E8D36 /* Foundation.framework in Frameworks */,
-				D4ADEF08F0406E27C12B5D8D /* libPods.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		2CDDAB251BB8C10800A2A595 /* Modified3rdParty */ = {
+			isa = PBXGroup;
+			children = (
+				2CDDAB261BB8C10800A2A595 /* SJCSimplePDFView */,
+			);
+			path = Modified3rdParty;
+			sourceTree = "<group>";
+		};
+		2CDDAB261BB8C10800A2A595 /* SJCSimplePDFView */ = {
+			isa = PBXGroup;
+			children = (
+				2CDDAB271BB8C10800A2A595 /* LICENSE */,
+				2CDDAB281BB8C10800A2A595 /* README.md */,
+				2CDDAB291BB8C10800A2A595 /* SJCSimplePDFView.h */,
+				2CDDAB2A1BB8C10800A2A595 /* SJCSimplePDFView.m */,
+			);
+			path = SJCSimplePDFView;
+			sourceTree = "<group>";
+		};
 		67AB6D0F18C5189F005E8D36 = {
 			isa = PBXGroup;
 			children = (
@@ -125,7 +148,6 @@
 				67AB6D2118C5189F005E8D36 /* ILPDFKitSample */,
 				67AB6D1A18C5189F005E8D36 /* Frameworks */,
 				67AB6D1918C5189F005E8D36 /* Products */,
-				ABD220139EAEE8A4B466C6AF /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -175,6 +197,7 @@
 		67AB6D5818C52131005E8D36 /* ILPDFKit */ = {
 			isa = PBXGroup;
 			children = (
+				2CDDAB251BB8C10800A2A595 /* Modified3rdParty */,
 				67AB6D5918C52131005E8D36 /* Controller */,
 				67AB6D5E18C52131005E8D36 /* Model */,
 				67AB6D7118C52131005E8D36 /* PDF.h */,
@@ -192,6 +215,8 @@
 				67AB6D5B18C52131005E8D36 /* PDFSerializer.m */,
 				67AB6D5C18C52131005E8D36 /* PDFViewController.h */,
 				67AB6D5D18C52131005E8D36 /* PDFViewController.m */,
+				2C1ED7701BB8C8CE00CBFADC /* PDFChoiceTableViewController.h */,
+				2C1ED7711BB8C8CE00CBFADC /* PDFChoiceTableViewController.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -264,15 +289,6 @@
 			path = Objects;
 			sourceTree = "<group>";
 		};
-		ABD220139EAEE8A4B466C6AF /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-				0FCDA9446D9B1CC7A5F5FCB4 /* Pods.debug.xcconfig */,
-				CFBACA32F7CDA16E05D75150 /* Pods.release.xcconfig */,
-			);
-			name = Pods;
-			sourceTree = "<group>";
-		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -280,12 +296,9 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 67AB6D4418C5189F005E8D36 /* Build configuration list for PBXNativeTarget "ILPDFKitSample" */;
 			buildPhases = (
-				EA6710A27D7113AC15E9DF69 /* Check Pods Manifest.lock */,
 				67AB6D1418C5189F005E8D36 /* Sources */,
 				67AB6D1518C5189F005E8D36 /* Frameworks */,
 				67AB6D1618C5189F005E8D36 /* Resources */,
-				E47DECA2D215A28B377EEB45 /* Embed Pods Frameworks */,
-				EC461E2212613B68F7F283FC /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -337,54 +350,6 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
-/* Begin PBXShellScriptBuildPhase section */
-		E47DECA2D215A28B377EEB45 /* Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "Embed Pods Frameworks";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		EA6710A27D7113AC15E9DF69 /* Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "Check Pods Manifest.lock";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
-			showEnvVarsInLog = 0;
-		};
-		EC461E2212613B68F7F283FC /* Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-/* End PBXShellScriptBuildPhase section */
-
 /* Begin PBXSourcesBuildPhase section */
 		67AB6D1418C5189F005E8D36 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -403,7 +368,9 @@
 				67AB6D8D18C52131005E8D36 /* PDFPage.m in Sources */,
 				67AB6D2818C5189F005E8D36 /* main.m in Sources */,
 				8F7AB4E01AA0AA94008C2AA3 /* PDFString.m in Sources */,
+				2CDDAB2D1BB8C10800A2A595 /* SJCSimplePDFView.m in Sources */,
 				67AB6D8F18C52131005E8D36 /* PDFObjectParser.m in Sources */,
+				2C1ED7721BB8C8CE00CBFADC /* PDFChoiceTableViewController.m in Sources */,
 				67AB6D2C18C5189F005E8D36 /* ILAppDelegate.m in Sources */,
 				67AB6D9418C52131005E8D36 /* PDFFormTextField.m in Sources */,
 				8F7AB4DA1AA0AA94008C2AA3 /* PDFArray.m in Sources */,
@@ -506,7 +473,6 @@
 		};
 		67AB6D4518C5189F005E8D36 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 0FCDA9446D9B1CC7A5F5FCB4 /* Pods.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -522,7 +488,6 @@
 		};
 		67AB6D4618C5189F005E8D36 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = CFBACA32F7CDA16E05D75150 /* Pods.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;

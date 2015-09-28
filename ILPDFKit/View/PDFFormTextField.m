@@ -81,7 +81,15 @@
         _textFieldOrTextView.backgroundColor = [UIColor clearColor];
         _baseFontSize = [PDFWidgetAnnotationView fontSizeForRect:frame value:nil multiline:multiline choice:NO];
         _currentFontSize = _baseFontSize;
-        [_textFieldOrTextView performSelector:@selector(setFont:) withObject:[UIFont systemFontOfSize:_baseFontSize]];
+        PDFForm* form = (PDFForm*)self.delegate;
+        if(form.defaultAppearance) {
+            [_textFieldOrTextView performSelector:@selector(setTextColor:) withObject:form.daColor];
+            [_textFieldOrTextView performSelector:@selector(setFont:) withObject:form.daFont];
+        } else {
+            [_textFieldOrTextView performSelector:@selector(setTextColor:) withObject:form.daColor];
+            [_textFieldOrTextView performSelector:@selector(setFont:) withObject:[UIFont systemFontOfSize:_baseFontSize]];
+        }
+        
         [self addSubview:_textFieldOrTextView];
     }
     return self;

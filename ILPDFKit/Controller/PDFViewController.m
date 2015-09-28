@@ -22,8 +22,12 @@
 
 #import "PDF.h"
 #import "PDFFormContainer.h"
+#import "PDFChoiceTableViewController.h"
+#import "PDFFormChoiceField.h"
 
 @interface PDFViewController(Private)
+<PDFChoiceTableDelegate>
+
 - (void)loadPDFView;
 - (CGPoint)margins;
 @end
@@ -101,6 +105,7 @@
     CGPoint margins = [self getMargins];
     NSArray *additionViews = [_document.forms createWidgetAnnotationViewsForSuperviewWithWidth:self.view.bounds.size.width margin:margins.x hMargin:margins.y];
     _pdfView = [[PDFView alloc] initWithFrame:self.view.bounds dataOrPath:pass additionViews:additionViews];
+    _pdfView.delegate = self;
     [self.view addSubview:_pdfView];
 }
 
@@ -124,5 +129,29 @@
         else return CGPointMake(PDFLandscapePhoneWMargin,PDFLandscapePhoneHMargin);
     }
 }
+
+#pragma mark - PDFViewDelegate handlers
+
+- (void) pdfView:(PDFView *)view withForm:(PDFForm *)form choiceFieldWasHit:(PDFFormChoiceField *)field {
+    // Present the choice field's list popover.
+    PDFChoiceTableViewController *choiceTable = [[PDFChoiceTableViewController alloc] initWithForm:form];
+    
+    choiceTable.delegate = self;
+    [self presentViewController:choiceTable animated:YES completion:nil];
+    
+    UIPopoverPresentationController *popover = choiceTable.popoverPresentationController;
+    popover.permittedArrowDirections = UIPopoverArrowDirectionUp;
+    popover.sourceRect = field.frame;
+    popover.sourceView = _pdfView.pdfView;
+}
+
+- (void) pdfChoiceTable:(PDFChoiceTableViewController*)table didSelectValue:(NSString *)value {
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+- (void) pdfChoiceTableCancled:(PDFChoiceTableViewController *)table {
+}
+
+
 
 @end

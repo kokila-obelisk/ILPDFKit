@@ -21,6 +21,7 @@
 // THE SOFTWARE.
 
 #import <UIKit/UIKit.h>
+#import "PDFView.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -30,10 +31,9 @@ NS_ASSUME_NONNULL_BEGIN
         [self.navigationController pushDetailViewController:pdfViewController animated:YES];
  */
 
-@class PDFView;
 @class PDFDocument;
 
-@interface PDFViewController : UIViewController
+@interface PDFViewController : UIViewController <PDFViewDelegate>
 
 /** The PDFDocument that represents the model for the PDFViewController
  */
