@@ -23,10 +23,11 @@
 #import "PDF.h"
 #import "PDFFormContainer.h"
 #import "PDFChoiceTableViewController.h"
+#import "PDFChoiceDateViewController.h"
 #import "PDFFormChoiceField.h"
 
 @interface PDFViewController(Private)
-<PDFChoiceTableDelegate>
+<PDFChoiceTableDelegate, PDFChoiceDateDelegate>
 
 - (void)loadPDFView;
 - (CGPoint)margins;
@@ -133,17 +134,29 @@
 #pragma mark - PDFViewDelegate handlers
 
 - (void) pdfView:(PDFView *)view withForm:(PDFForm *)form choiceFieldWasHit:(PDFFormChoiceField *)field {
-    // Present the choice field's list popover.
-    PDFChoiceTableViewController *choiceTable = [[PDFChoiceTableViewController alloc] initWithForm:form];
+    UIPopoverPresentationController *popover;
     
-    choiceTable.delegate = self;
-    [self presentViewController:choiceTable animated:YES completion:nil];
-    
-    UIPopoverPresentationController *popover = choiceTable.popoverPresentationController;
+    if( [form.uname isEqualToString:@"date"] ) {
+        PDFChoiceDateViewController *choiceDate = [[PDFChoiceDateViewController alloc] initWithForm:form];
+        choiceDate.delegate = self;
+        [self presentViewController:choiceDate animated:YES completion:nil];
+        popover = choiceDate.popoverPresentationController;
+    } else {
+        // Present the choice field's list popover.
+        PDFChoiceTableViewController *choiceTable = [[PDFChoiceTableViewController alloc] initWithForm:form];
+        choiceTable.delegate = self;
+        [self presentViewController:choiceTable animated:YES completion:nil];
+        popover = choiceTable.popoverPresentationController;
+    }
+
+    // Configure the popover controller
     popover.permittedArrowDirections = UIPopoverArrowDirectionUp;
     popover.sourceRect = field.frame;
     popover.sourceView = _pdfView.pdfView;
 }
+
+
+#pragma mark PDFChoiceTableVC delegate
 
 - (void) pdfChoiceTable:(PDFChoiceTableViewController*)table didSelectValue:(NSString *)value {
     [self dismissViewControllerAnimated:YES completion:nil];
@@ -152,6 +165,13 @@
 - (void) pdfChoiceTableCancled:(PDFChoiceTableViewController *)table {
 }
 
+#pragma mark PDFChoiceDateVC delegate
+- (void) pdfChoiceDate:(PDFChoiceDateViewController*)datevc didSelectDate:(NSString*)value {
+    
+}
 
+- (void) pdfChoiceDateDismissed {
+//    [self dismissViewControllerAnimated:YES completion:nil];
+}
 
 @end

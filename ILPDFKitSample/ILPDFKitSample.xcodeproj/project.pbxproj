@@ -7,9 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		07D994641BB21A7E00018198 /* testB.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 07D994631BB21A7E00018198 /* testB.pdf */; settings = {ASSET_TAGS = (); }; };
-		2C1ED7721BB8C8CE00CBFADC /* PDFChoiceTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C1ED7711BB8C8CE00CBFADC /* PDFChoiceTableViewController.m */; settings = {ASSET_TAGS = (); }; };
-		2CDDAB2D1BB8C10800A2A595 /* SJCSimplePDFView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CDDAB2A1BB8C10800A2A595 /* SJCSimplePDFView.m */; settings = {ASSET_TAGS = (); }; };
+		07D994641BB21A7E00018198 /* testB.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 07D994631BB21A7E00018198 /* testB.pdf */; };
+		2C1ED7721BB8C8CE00CBFADC /* PDFChoiceTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C1ED7711BB8C8CE00CBFADC /* PDFChoiceTableViewController.m */; };
+		2C8C1ECB1BB8FB75008DBA90 /* PDFChoiceDateViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C8C1ECA1BB8FB75008DBA90 /* PDFChoiceDateViewController.m */; };
+		2CDDAB2D1BB8C10800A2A595 /* SJCSimplePDFView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CDDAB2A1BB8C10800A2A595 /* SJCSimplePDFView.m */; };
 		67AB6D1C18C5189F005E8D36 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 67AB6D1B18C5189F005E8D36 /* Foundation.framework */; };
 		67AB6D1E18C5189F005E8D36 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 67AB6D1D18C5189F005E8D36 /* CoreGraphics.framework */; };
 		67AB6D2018C5189F005E8D36 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 67AB6D1F18C5189F005E8D36 /* UIKit.framework */; };
@@ -45,6 +46,8 @@
 		07D994631BB21A7E00018198 /* testB.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = testB.pdf; sourceTree = "<group>"; };
 		2C1ED7701BB8C8CE00CBFADC /* PDFChoiceTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PDFChoiceTableViewController.h; sourceTree = "<group>"; };
 		2C1ED7711BB8C8CE00CBFADC /* PDFChoiceTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PDFChoiceTableViewController.m; sourceTree = "<group>"; };
+		2C8C1EC91BB8FB75008DBA90 /* PDFChoiceDateViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PDFChoiceDateViewController.h; sourceTree = "<group>"; };
+		2C8C1ECA1BB8FB75008DBA90 /* PDFChoiceDateViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PDFChoiceDateViewController.m; sourceTree = "<group>"; };
 		2CDDAB271BB8C10800A2A595 /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
 		2CDDAB281BB8C10800A2A595 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		2CDDAB291BB8C10800A2A595 /* SJCSimplePDFView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SJCSimplePDFView.h; sourceTree = "<group>"; };
@@ -217,6 +220,8 @@
 				67AB6D5D18C52131005E8D36 /* PDFViewController.m */,
 				2C1ED7701BB8C8CE00CBFADC /* PDFChoiceTableViewController.h */,
 				2C1ED7711BB8C8CE00CBFADC /* PDFChoiceTableViewController.m */,
+				2C8C1EC91BB8FB75008DBA90 /* PDFChoiceDateViewController.h */,
+				2C8C1ECA1BB8FB75008DBA90 /* PDFChoiceDateViewController.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -377,6 +382,7 @@
 				67AB6D9118C52131005E8D36 /* PDFFormButtonField.m in Sources */,
 				67AB6D9318C52131005E8D36 /* PDFFormSignatureField.m in Sources */,
 				67AB6D9218C52131005E8D36 /* PDFFormChoiceField.m in Sources */,
+				2C8C1ECB1BB8FB75008DBA90 /* PDFChoiceDateViewController.m in Sources */,
 				8F7AB4DD1AA0AA94008C2AA3 /* PDFNull.m in Sources */,
 				67AB6D9618C52131005E8D36 /* PDFWidgetAnnotationView.m in Sources */,
 				67AB6D8518C52131005E8D36 /* PDFViewController.m in Sources */,
