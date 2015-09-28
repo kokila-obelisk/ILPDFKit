@@ -125,14 +125,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		2CDDAB251BB8C10800A2A595 /* Modified3rdParty */ = {
-			isa = PBXGroup;
-			children = (
-				2CDDAB261BB8C10800A2A595 /* SJCSimplePDFView */,
-			);
-			path = Modified3rdParty;
-			sourceTree = "<group>";
-		};
 		2CDDAB261BB8C10800A2A595 /* SJCSimplePDFView */ = {
 			isa = PBXGroup;
 			children = (
@@ -200,7 +192,7 @@
 		67AB6D5818C52131005E8D36 /* ILPDFKit */ = {
 			isa = PBXGroup;
 			children = (
-				2CDDAB251BB8C10800A2A595 /* Modified3rdParty */,
+				2CDDAB261BB8C10800A2A595 /* SJCSimplePDFView */,
 				67AB6D5918C52131005E8D36 /* Controller */,
 				67AB6D5E18C52131005E8D36 /* Model */,
 				67AB6D7118C52131005E8D36 /* PDF.h */,
