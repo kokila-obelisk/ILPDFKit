@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
 
 s.name         = "ILPDFKit"
-s.version      = "0.2.0"
+s.version      = "0.2.1"
 s.summary      = "A simple toolkit for filling out and saving PDF forms, and extracting PDF data."
 s.homepage     = "http://ilpdfkit.com"
 s.screenshot  = "http://imgur.com/oo5HLUg.png"
@@ -14,7 +14,5 @@ s.source_files  = "ILPDFKit/**/*.{h,m}"
 s.frameworks = "QuartzCore", "UIKit"
 s.requires_arc = true
 s.documentation_url = 'http://ilpdfkit.com/index.html'
-# s.dependency 'SJCSimplePDFView'
-#, :git => "https://github.com/conquermobile/SJCSimplePDFView.git", :tag => "1.0.0"
 
 end
