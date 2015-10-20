@@ -51,9 +51,9 @@
     if (self != nil) {
         self.opaque = NO;
         self.backgroundColor = ro ? [UIColor clearColor]:PDFWidgetColor;
-        if (!multiline) {
-            self.layer.cornerRadius = self.frame.size.height/6;
-        }
+//        if (!multiline) {
+//            self.layer.cornerRadius = self.frame.size.height/6;
+//        }
         _multiline = multiline;
         Class textCls = multiline ? [UITextView class]:[UITextField class];
         _textFieldOrTextView = [[textCls alloc] initWithFrame:CGRectMake(0, 0, frame.size.width, frame.size.height)];
@@ -68,13 +68,15 @@
             ((UITextView *)_textFieldOrTextView).autoresizingMask = UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleHeight;
             ((UITextView *)_textFieldOrTextView).delegate = self;
             ((UITextView *)_textFieldOrTextView).scrollEnabled = YES;
-            [((UITextView *)_textFieldOrTextView) setTextContainerInset:UIEdgeInsetsMake(4, 4, 4, 4)];
+            [((UITextView *)_textFieldOrTextView) setTextContainerInset:UIEdgeInsetsMake(4, 10, 4, 4)];
         } else {
             ((UITextField *)_textFieldOrTextView).textAlignment = (NSTextAlignment)alignment;
             ((UITextField *)_textFieldOrTextView).delegate = self;
             ((UITextField *)_textFieldOrTextView).adjustsFontSizeToFitWidth = YES;
             ((UITextField *)_textFieldOrTextView).minimumFontSize = PDFFormMinFontSize;
             ((UITextField *)_textFieldOrTextView).autoresizingMask = UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleHeight;
+            ((UITextField *)_textFieldOrTextView).leftView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 10, frame.size.height)];
+            ((UITextField *)_textFieldOrTextView).leftViewMode = UITextFieldViewModeAlways;
             [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(textChanged:) name:UITextFieldTextDidChangeNotification object:_textFieldOrTextView];
         }
         _textFieldOrTextView.opaque = NO;

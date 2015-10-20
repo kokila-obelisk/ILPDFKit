@@ -150,7 +150,7 @@
     }
 
     // Configure the popover controller
-    popover.permittedArrowDirections = UIPopoverArrowDirectionUp;
+//    popover.permittedArrowDirections = UIPopoverArrowDirectionUp | UIPopoverArrowDirectionDown;
     popover.sourceRect = field.frame;
     popover.sourceView = _pdfView.pdfView;
 }

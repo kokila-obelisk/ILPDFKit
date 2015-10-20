@@ -65,7 +65,7 @@
     self = [super initWithFrame:frame];
     if (self != nil) {
         self.opaque = NO;
-        self.backgroundColor = [PDFWidgetColor colorWithAlphaComponent:1];
+        self.backgroundColor = PDFWidgetColor; // FIXME:  Need image support [PDFWidgetColor colorWithAlphaComponent:1];
         self.layer.cornerRadius = self.frame.size.height/6;
         _options = opt;
         _tv= [[UITableView alloc] initWithFrame:CGRectMake(0, frame.size.height, frame.size.width, frame.size.height*PDFChoiceFieldRowHeightDivisor) style:UITableViewStylePlain];
