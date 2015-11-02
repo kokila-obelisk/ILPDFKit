@@ -50,6 +50,11 @@ NS_ASSUME_NONNULL_BEGIN
 - (instancetype) __unavailable initWithFrame:(CGRect)frame;
 - (nullable instancetype) __unavailable initWithCoder:(NSCoder *)aDecoder;
 
+/**
+ * Form Rendering
+ */
++ (void)drawWithForm:(PDFForm*)form rect:(CGRect)frame context:(CGContextRef)ctx;
+
 @end
 
 NS_ASSUME_NONNULL_END

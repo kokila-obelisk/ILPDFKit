@@ -27,24 +27,6 @@
 
 #define PDFChoiceFieldRowHeightDivisor MIN(5,[self.options count])
 
-@interface PDFFormChoiceFieldDropIndicator : UIView
-@end
-
-@implementation PDFFormChoiceFieldDropIndicator
-
-- (void)drawRect:(CGRect)rect {
-    CGContextRef ctx = UIGraphicsGetCurrentContext();
-    CGFloat margin = rect.size.width/3;
-    CGContextSetFillColorWithColor(ctx, [UIColor blackColor].CGColor);
-    CGContextMoveToPoint(ctx, margin, margin);
-    CGContextAddLineToPoint(ctx, rect.size.width-margin, rect.size.height/2);
-    CGContextAddLineToPoint(ctx, margin, rect.size.height-margin);
-    CGContextAddLineToPoint(ctx,margin,margin);
-    CGContextFillPath(ctx);
-}
-
-@end
-
 @implementation PDFFormChoiceField {
     NSArray *_options;
     NSUInteger _selectedIndex;
@@ -61,10 +43,11 @@
     self = [super initWithFrame:frame];
     if (self != nil) {
         self.opaque = NO;
-        self.backgroundColor = PDFWidgetColor; // FIXME:  Need image support [PDFWidgetColor colorWithAlphaComponent:1];
+        self.backgroundColor = PDFWidgetColor;
         _options = opt;
         _form = form;
-//        self.layer.cornerRadius = self.frame.size.height/6;
+
+        //        self.layer.cornerRadius = self.frame.size.height/6;
 //        self.clipsToBounds = YES;
 
         CGRect selectionFrame = CGRectMake(10, 0, frame.size.width-10, frame.size.height);
@@ -105,23 +88,6 @@
     }
     [_selection setText:value];
     
-    // Check for selected value Image.
-    NSString *imageFileName = [NSString stringWithFormat:@"%@_%@.png", _form.uname, self.value];
-    NSString *docPath = _form.parent.document.documentPath;
-    NSString *imagePath = [[docPath stringByDeletingLastPathComponent] stringByAppendingPathComponent:imageFileName];
-    UIImage *image = [UIImage imageWithContentsOfFile:imagePath];
-    
-    if( image ) {
-        _selection.hidden = YES;
-        [_middleButton setImage:image forState:UIControlStateNormal];
-        _middleButton.imageView.contentMode = UIViewContentModeScaleAspectFit;
-        _middleButton.imageView.clipsToBounds = NO;
-//        _middleButton.clipsToBounds = NO;
-    } else {
-        _selection.hidden = NO;
-        [_middleButton setImage:nil forState:UIControlStateNormal];
-    }
-    
     [self refresh];
 }
 
@@ -140,6 +106,7 @@
 }
 
 - (void)refresh {
+    [self updateSelectionImage];
     [super refresh];
 }
 
@@ -159,7 +126,25 @@
         [_selection setFont:[UIFont systemFontOfSize:_baseFontHeight]];
         //            NSLog(@"Form (%@) [%@]: defaultAppearance: %f size, %@ font", form.name, form.uname, _baseFontHeight, @"System" );
     }
+    
+    [self updateSelectionImage];
 }
+
+- (void) updateSelectionImage {
+    UIImage *image = [PDFFormChoiceField imageForForm:_form value:_selection.text];
+    
+    if( image ) {
+        _selection.hidden = YES;
+        [_middleButton setImage:image forState:UIControlStateNormal];
+        _middleButton.imageView.contentMode = UIViewContentModeScaleAspectFit;
+        _middleButton.imageView.clipsToBounds = NO;
+        //        _middleButton.clipsToBounds = NO;
+    } else {
+        _selection.hidden = NO;
+        [_middleButton setImage:nil forState:UIControlStateNormal];
+    }
+}
+
 
 - (void)updateWithZoom:(CGFloat)zoom {
     [super updateWithZoom:zoom];
@@ -173,5 +158,44 @@
     [self.parentView.delegate pdfView:self.parentView withForm:(PDFForm*)self.delegate choiceFieldWasHit:self];
 }
 
+#pragma mark - Rendering
 
++ (UIImage*)imageForForm:(PDFForm*)form value:(NSString*)value {
+    NSString *docPath = form.parent.document.documentPath;
+    NSString *imageBasePath = [docPath stringByDeletingLastPathComponent];
+    
+    NSString *imageFileName = [NSString stringWithFormat:@"%@_%@.png", form.uname, value];
+    NSString *imagePath = [imageBasePath stringByAppendingPathComponent:imageFileName];
+    UIImage *image = [UIImage imageWithContentsOfFile:imagePath];
+    return image;
+}
+
++ (void)drawWithForm:(PDFForm*)form rect:(CGRect)frame context:(CGContextRef)ctx {
+    UIImage *image = [PDFFormChoiceField imageForForm:form value:form.value];
+
+    if (image) {
+        UIGraphicsPushContext(ctx);
+        CGRect imageRect = CGRectMake(0, 0, frame.size.width, frame.size.height);
+        [image drawInRect:imageRect];
+        UIGraphicsPopContext();
+    } else {
+        NSString *text = form.value;
+
+        CGRect selectionFrame = CGRectMake(10, 0, frame.size.width-10, frame.size.height);
+        CGFloat baseFontHeight = [PDFWidgetAnnotationView fontSizeForRect:selectionFrame value:nil multiline:NO choice:YES];
+
+        UIFont *font; // [UIFont systemFontOfSize:[PDFWidgetAnnotationView fontSizeForRect:frame value:form.value multiline:NO choice:YES]];
+        if(form.defaultAppearance) {
+//            [_selection setTextColor:_form.daColor];
+            font = form.daFont;
+        } else {
+//            [_selection setTextColor:[UIColor blackColor]];
+            font = [UIFont systemFontOfSize:baseFontHeight];
+        }
+        
+        UIGraphicsPushContext(ctx);
+        [text drawInRect:selectionFrame withAttributes:@{NSFontAttributeName:font}];
+        UIGraphicsPopContext();
+    }
+}
 @end

@@ -282,7 +282,7 @@
 #pragma mark - Rendering
 
 - (void)vectorRenderInPDFContext:(CGContextRef)ctx forRect:(CGRect)rect {
-    if (self.formType == PDFFormTypeText || self.formType == PDFFormTypeChoice) {
+    if (self.formType == PDFFormTypeText) {
         NSString *text = self.value;
         UIFont *font = [UIFont systemFontOfSize:[PDFWidgetAnnotationView fontSizeForRect:rect value:self.value multiline:((_flags & PDFFormFlagTextFieldMultiline) > 0 && self.formType == PDFFormTypeText) choice:self.formType == PDFFormTypeChoice]];
         UIGraphicsPushContext(ctx);
@@ -291,8 +291,13 @@
         paragraphStyle.alignment = self.textAlignment;
         [text drawInRect:CGRectMake(0, 0, rect.size.width, rect.size.height*2.0) withAttributes:@{NSFontAttributeName:font,NSParagraphStyleAttributeName: paragraphStyle}];
         UIGraphicsPopContext();
+    } else if(self.formType == PDFFormTypeChoice) {
+        [PDFFormChoiceField drawWithForm:self rect:rect context:ctx];
     } else if (self.formType == PDFFormTypeButton) {
-        [PDFFormButtonField drawWithRect:rect context:ctx back:NO selected:[self.value isEqualToString:self.exportValue] && (_flags & PDFFormFlagButtonPushButton) == 0 radio:(_flags & PDFFormFlagButtonRadio) > 0];
+        BOOL selected = [self.value isEqualToString:self.exportValue]
+                        && (_flags & PDFFormFlagButtonPushButton) == 0;
+        BOOL radio = (_flags & PDFFormFlagButtonRadio) > 0;
+        [PDFFormButtonField drawWithRect:rect context:ctx back:NO selected:selected radio:radio];
     }
 }
 
