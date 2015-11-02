@@ -23,6 +23,8 @@
 #import <UIKit/UIKit.h>
 #import "PDFWidgetAnnotationView.h"
 
+@class PDFForm;
+
 NS_ASSUME_NONNULL_BEGIN
 
 /** The PDFFormButtonField represents a view for a PDF button field.
@@ -64,7 +66,7 @@ NS_ASSUME_NONNULL_BEGIN
  @param rad YES if a radio button, otherwise NO.
  @return A new PDFFormButtonField object.
  */
-- (instancetype)initWithFrame:(CGRect)frame radio:(BOOL)rad NS_DESIGNATED_INITIALIZER;
+- (instancetype)initWithForm:(PDFForm*)form frame:(CGRect)frame radio:(BOOL)rad NS_DESIGNATED_INITIALIZER;
 
 /**
  * Make designated super initializers unavailable.

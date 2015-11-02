@@ -108,6 +108,8 @@
 //                _daColor = [UIColor colorWithWhite:greyLevel alpha:1];
 //            }
         }
+        
+//        NSLog(@"Form (%@) [%@]: defaultAppearance: %f size, %@ font", _name, _uname, _daSize, _daFont.fontName );
 
         NSNumber *formTextAlignment = [leaf  inheritableValueForKey:@"Q"];
         if (formTextAlignment) {
@@ -332,14 +334,14 @@
     _uiBaseFrame = CGRectIntegral(CGRectMake(_pageFrame.origin.x, _pageFrame.origin.y+pageOffset, _pageFrame.size.width, _pageFrame.size.height));
     switch (_formType) {
         case PDFFormTypeText:
-            _formUIElement = [[PDFFormTextField alloc] initWithFrame:_uiBaseFrame multiline:((_flags & PDFFormFlagTextFieldMultiline) > 0) alignment:_textAlignment secureEntry:((_flags & PDFFormFlagTextFieldPassword) > 0) readOnly:((_flags & PDFFormFlagReadOnly) > 0)];
+            _formUIElement = [[PDFFormTextField alloc] initWithForm:self frame:_uiBaseFrame multiline:((_flags & PDFFormFlagTextFieldMultiline) > 0) alignment:_textAlignment secureEntry:((_flags & PDFFormFlagTextFieldPassword) > 0) readOnly:((_flags & PDFFormFlagReadOnly) > 0)];
         break;
         case PDFFormTypeButton: {
             BOOL radio = ((_flags & PDFFormFlagButtonRadio) > 0);
             if (_setAppearanceStream) {
                 if ([_setAppearanceStream rangeOfString:@"ZaDb"].location != NSNotFound && [_setAppearanceStream rangeOfString:@"(l)"].location!=NSNotFound)radio = YES;
             }
-            PDFFormButtonField *temp = [[PDFFormButtonField alloc] initWithFrame:_uiBaseFrame radio:radio];
+            PDFFormButtonField *temp = [[PDFFormButtonField alloc] initWithForm:self frame:_uiBaseFrame radio:radio];
             temp.noOff = ((_flags & PDFFormFlagButtonNoToggleToOff) > 0);
             temp.name = self.name;
             temp.pushButton = ((_flags & PDFFormFlagButtonPushButton) > 0);
@@ -348,7 +350,7 @@
         }
         break;
         case PDFFormTypeChoice:
-            _formUIElement = [[PDFFormChoiceField alloc] initWithFrame:_uiBaseFrame options:_options];
+            _formUIElement = [[PDFFormChoiceField alloc] initWithForm:self frame:_uiBaseFrame options:_options];
         break;
         case PDFFormTypeSignature:
             _formUIElement = [[PDFFormSignatureField alloc] initWithFrame:_uiBaseFrame];

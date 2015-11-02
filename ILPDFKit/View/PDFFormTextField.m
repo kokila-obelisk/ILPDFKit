@@ -46,7 +46,7 @@
 
 #pragma mark - PDFFormTextField
 
-- (instancetype)initWithFrame:(CGRect)frame multiline:(BOOL)multiline alignment:(NSTextAlignment)alignment secureEntry:(BOOL)secureEntry readOnly:(BOOL)ro {
+- (instancetype)initWithForm:(PDFForm*)form frame:(CGRect)frame multiline:(BOOL)multiline alignment:(NSTextAlignment)alignment secureEntry:(BOOL)secureEntry readOnly:(BOOL)ro {
     self = [super initWithFrame:frame];
     if (self != nil) {
         self.opaque = NO;
@@ -83,13 +83,14 @@
         _textFieldOrTextView.backgroundColor = [UIColor clearColor];
         _baseFontSize = [PDFWidgetAnnotationView fontSizeForRect:frame value:nil multiline:multiline choice:NO];
         _currentFontSize = _baseFontSize;
-        PDFForm* form = (PDFForm*)self.delegate;
         if(form.defaultAppearance) {
             [_textFieldOrTextView performSelector:@selector(setTextColor:) withObject:form.daColor];
             [_textFieldOrTextView performSelector:@selector(setFont:) withObject:form.daFont];
+            NSLog(@"Form (%@) [%@]: defaultAppearance: %f size, %@ font", form.name, form.uname, form.daSize, form.daFont.fontName );
         } else {
             [_textFieldOrTextView performSelector:@selector(setTextColor:) withObject:form.daColor];
             [_textFieldOrTextView performSelector:@selector(setFont:) withObject:[UIFont systemFontOfSize:_baseFontSize]];
+            NSLog(@"Form (%@) [%@]: defaultAppearance: %f size, %@ font", form.name, form.uname, _baseFontSize, @"System" );
         }
         
         [self addSubview:_textFieldOrTextView];

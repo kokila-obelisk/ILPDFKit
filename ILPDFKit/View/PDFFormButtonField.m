@@ -79,7 +79,7 @@
 #pragma mark - PDFFormButtonField
 #pragma mark - Initialization
 
-- (instancetype)initWithFrame:(CGRect)frame radio:(BOOL)rad {
+- (instancetype)initWithForm:(PDFForm*)form frame:(CGRect)frame radio:(BOOL)rad {
     self = [super initWithFrame:frame];
     if (self) {
         _radio = rad;

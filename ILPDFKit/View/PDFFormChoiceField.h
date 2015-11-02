@@ -41,7 +41,7 @@ NS_ASSUME_NONNULL_BEGIN
  @param opt An array of NSString obejcts representing the choices for the field.
  @return A new PDFFormChoiceField object. 
  */
-- (instancetype)initWithFrame:(CGRect)frame options:(NSArray *)opt NS_DESIGNATED_INITIALIZER;
+- (instancetype)initWithForm:(PDFForm*)form frame:(CGRect)frame options:(NSArray *)opt NS_DESIGNATED_INITIALIZER;
 
 /**
  * Make designated super initializers unavailable.

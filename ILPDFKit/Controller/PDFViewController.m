@@ -111,24 +111,25 @@
 }
 
 - (CGPoint)getMargins {
-    
-    // AH: Removed margines, because the new SJSimplePDFView is much more derministic with its margines (configured to be zero)
-    static const float PDFLandscapePadWMargin = 0; // 13.0f;
-    static const float PDFLandscapePadHMargin = 0; // 7.25f;
-    static const float PDFPortraitPadWMargin = 0; // 9.0f;
-    static const float PDFPortraitPadHMargin = 0;  // 6.10f;
-    static const float PDFPortraitPhoneWMargin = 0; //3.5f;
-    static const float PDFPortraitPhoneHMargin = 0; // 6.7f;
-    static const float PDFLandscapePhoneWMargin = 0; // 6.8f;
-    static const float PDFLandscapePhoneHMargin = 0; // 6.5f;
-    
-    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
-        if (UIInterfaceOrientationIsPortrait(self.interfaceOrientation))return CGPointMake(PDFPortraitPadWMargin,PDFPortraitPadHMargin);
-        else return CGPointMake(PDFLandscapePadWMargin,PDFLandscapePadHMargin);
-    } else {
-        if (UIInterfaceOrientationIsPortrait(self.interfaceOrientation))return CGPointMake(PDFPortraitPhoneWMargin,PDFPortraitPhoneHMargin);
-        else return CGPointMake(PDFLandscapePhoneWMargin,PDFLandscapePhoneHMargin);
-    }
+    // AH: Removed margines, because the new SJSimplePDFView is much more derministic with zero margines (configured to be zero)
+    return CGPointMake(0, 0);
+
+//    static const float PDFLandscapePadWMargin = 0; // 13.0f;
+//    static const float PDFLandscapePadHMargin = 0; // 7.25f;
+//    static const float PDFPortraitPadWMargin = 0; // 9.0f;
+//    static const float PDFPortraitPadHMargin = 0;  // 6.10f;
+//    static const float PDFPortraitPhoneWMargin = 0; //3.5f;
+//    static const float PDFPortraitPhoneHMargin = 0; // 6.7f;
+//    static const float PDFLandscapePhoneWMargin = 0; // 6.8f;
+//    static const float PDFLandscapePhoneHMargin = 0; // 6.5f;
+
+//    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
+//        if (UIInterfaceOrientationIsPortrait(self.interfaceOrientation))return CGPointMake(PDFPortraitPadWMargin,PDFPortraitPadHMargin);
+//        else return CGPointMake(PDFLandscapePadWMargin,PDFLandscapePadHMargin);
+//    } else {
+//        if (UIInterfaceOrientationIsPortrait(self.interfaceOrientation))return CGPointMake(PDFPortraitPhoneWMargin,PDFPortraitPhoneHMargin);
+//        else return CGPointMake(PDFLandscapePhoneWMargin,PDFLandscapePhoneHMargin);
+//    }
 }
 
 #pragma mark - PDFViewDelegate handlers
