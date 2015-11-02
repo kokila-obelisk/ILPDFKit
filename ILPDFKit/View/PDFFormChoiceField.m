@@ -62,10 +62,10 @@
     if (self != nil) {
         self.opaque = NO;
         self.backgroundColor = PDFWidgetColor; // FIXME:  Need image support [PDFWidgetColor colorWithAlphaComponent:1];
-        self.layer.cornerRadius = self.frame.size.height/6;
         _options = opt;
         _form = form;
-        self.clipsToBounds = YES;
+//        self.layer.cornerRadius = self.frame.size.height/6;
+//        self.clipsToBounds = YES;
 
         CGRect selectionFrame = CGRectMake(10, 0, frame.size.width-10, frame.size.height);
         _baseFontHeight = [PDFWidgetAnnotationView fontSizeForRect:selectionFrame value:nil multiline:NO choice:YES];
@@ -104,6 +104,24 @@
         _selectedIndex = NSNotFound;
     }
     [_selection setText:value];
+    
+    // Check for selected value Image.
+    NSString *imageFileName = [NSString stringWithFormat:@"%@_%@.png", _form.uname, self.value];
+    NSString *docPath = _form.parent.document.documentPath;
+    NSString *imagePath = [[docPath stringByDeletingLastPathComponent] stringByAppendingPathComponent:imageFileName];
+    UIImage *image = [UIImage imageWithContentsOfFile:imagePath];
+    
+    if( image ) {
+        _selection.hidden = YES;
+        [_middleButton setImage:image forState:UIControlStateNormal];
+        _middleButton.imageView.contentMode = UIViewContentModeScaleAspectFit;
+        _middleButton.imageView.clipsToBounds = NO;
+//        _middleButton.clipsToBounds = NO;
+    } else {
+        _selection.hidden = NO;
+        [_middleButton setImage:nil forState:UIControlStateNormal];
+    }
+    
     [self refresh];
 }
 

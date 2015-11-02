@@ -25,7 +25,7 @@
 
 @class PDFWidgetAnnotationView;
 @class PDFFormChoiceField;
-@class PDFView;
+@class PDFView, PDFForm;
 
 @protocol PDFViewDelegate <NSObject>
 
