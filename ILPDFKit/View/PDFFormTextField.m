@@ -86,11 +86,11 @@
         if(form.defaultAppearance) {
             [_textFieldOrTextView performSelector:@selector(setTextColor:) withObject:form.daColor];
             [_textFieldOrTextView performSelector:@selector(setFont:) withObject:form.daFont];
-            NSLog(@"Form (%@) [%@]: defaultAppearance: %f size, %@ font", form.name, form.uname, form.daSize, form.daFont.fontName );
+//            NSLog(@"Form (%@) [%@]: defaultAppearance: %f size, %@ font", form.name, form.uname, form.daSize, form.daFont.fontName );
         } else {
             [_textFieldOrTextView performSelector:@selector(setTextColor:) withObject:form.daColor];
             [_textFieldOrTextView performSelector:@selector(setFont:) withObject:[UIFont systemFontOfSize:_baseFontSize]];
-            NSLog(@"Form (%@) [%@]: defaultAppearance: %f size, %@ font", form.name, form.uname, _baseFontSize, @"System" );
+//            NSLog(@"Form (%@) [%@]: defaultAppearance: %f size, %@ font", form.name, form.uname, _baseFontSize, @"System" );
         }
         
         [self addSubview:_textFieldOrTextView];

@@ -52,6 +52,7 @@
     UIButton *_middleButton;
     BOOL _dropped;
     CGFloat _baseFontHeight;
+    __weak PDFForm *_form;
 }
 
 #pragma mark - PDFFormChoiceField
@@ -63,24 +64,16 @@
         self.backgroundColor = PDFWidgetColor; // FIXME:  Need image support [PDFWidgetColor colorWithAlphaComponent:1];
         self.layer.cornerRadius = self.frame.size.height/6;
         _options = opt;
+        _form = form;
         self.clipsToBounds = YES;
 
         CGRect selectionFrame = CGRectMake(10, 0, frame.size.width-10, frame.size.height);
         _baseFontHeight = [PDFWidgetAnnotationView fontSizeForRect:selectionFrame value:nil multiline:NO choice:YES];
-        _selection = [[UILabel alloc] initWithFrame:CGRectMake(10, 0, frame.size.width-10, frame.size.height)];
+        _selection = [[UILabel alloc] initWithFrame:selectionFrame];
         _selection.opaque = NO;
         _selection.adjustsFontSizeToFitWidth = YES;
         [_selection setBackgroundColor:[UIColor clearColor]];
-
-        if(form.defaultAppearance) {
-            [_selection setTextColor:form.daColor];
-            [_selection setFont:form.daFont];
-            NSLog(@"Form (%@) [%@]: defaultAppearance: %f size, %@ font", form.name, form.uname, form.daSize, form.daFont.fontName );
-        } else {
-            [_selection setTextColor:[UIColor blackColor]];
-            [_selection setFont:[UIFont systemFontOfSize:_baseFontHeight]];
-            NSLog(@"Form (%@) [%@]: defaultAppearance: %f size, %@ font", form.name, form.uname, _baseFontHeight, @"System" );
-        }
+        [self updateSelectionUI];
         [self addSubview:_selection];
 
         _middleButton = [[UIButton alloc] initWithFrame:self.bounds];
@@ -136,13 +129,23 @@
 //    if (_dropped) [self dropButtonPressed:_dropIndicator];
 }
 
+- (void)updateSelectionUI {
+    CGRect selectionFrame = CGRectMake(10, 0, self.frame.size.width-10, self.frame.size.height);
+    _selection.frame  = selectionFrame;
+    if(_form.defaultAppearance) {
+        [_selection setTextColor:_form.daColor];
+        [_selection setFont:_form.daFont];
+        //            NSLog(@"Form (%@) [%@]: defaultAppearance: %f size, %@ font", form.name, form.uname, form.daSize, form.daFont.fontName );
+    } else {
+        [_selection setTextColor:[UIColor blackColor]];
+        [_selection setFont:[UIFont systemFontOfSize:_baseFontHeight]];
+        //            NSLog(@"Form (%@) [%@]: defaultAppearance: %f size, %@ font", form.name, form.uname, _baseFontHeight, @"System" );
+    }
+}
+
 - (void)updateWithZoom:(CGFloat)zoom {
     [super updateWithZoom:zoom];
-//    _dropIndicator.frame = CGRectMake(self.frame.size.width-self.frame.size.height*1.5, -self.frame.size.height*0.25, self.frame.size.height*1.5, self.frame.size.height*1.5);
-    _selection.frame  = CGRectMake(1, 0, self.frame.size.width-self.frame.size.height, self.frame.size.height);
-    [_selection setFont:[UIFont systemFontOfSize:_baseFontHeight*zoom]];
-//    _dropIndicator.transform = CGAffineTransformMakeRotation(0);
-//    [_dropIndicator setNeedsDisplay];
+    [self updateSelectionUI];
     [self setNeedsDisplay];
 }
 
