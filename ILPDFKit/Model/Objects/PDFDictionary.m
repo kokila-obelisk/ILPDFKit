@@ -240,7 +240,7 @@ void checkKeys(const char *key,CGPDFObjectRef value,void *info) {
 - (PDFString *)stringFromKey:(PDFName *)key {
     CGPDFStringRef str = NULL;
     if (CGPDFDictionaryGetString(_dict,[key pdfCString], &str)) {
-        return [[PDFString alloc] initWithTextString:(__bridge NSString *)CGPDFStringCopyTextString(str)];
+        return [[PDFString alloc] initWithTextString:(__bridge_transfer NSString *)CGPDFStringCopyTextString(str)];
     }
     return nil;
 }

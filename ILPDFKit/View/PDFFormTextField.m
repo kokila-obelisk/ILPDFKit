@@ -40,8 +40,7 @@
 #pragma mark - NSObject
 
 - (void)dealloc {
-    [[NSNotificationCenter defaultCenter]
-    removeObserver:self];
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 #pragma mark - PDFFormTextField
@@ -55,43 +54,52 @@
 //            self.layer.cornerRadius = self.frame.size.height/6;
 //        }
         _multiline = multiline;
-        Class textCls = multiline ? [UITextView class]:[UITextField class];
-        _textFieldOrTextView = [[textCls alloc] initWithFrame:CGRectMake(0, 0, frame.size.width, frame.size.height)];
-        if (secureEntry) {
-            ((UITextField *)_textFieldOrTextView).secureTextEntry = YES;
+        CGRect textFrame = CGRectMake(0, 0, frame.size.width, frame.size.height);
+
+        UIFont *font;
+        if(form.defaultAppearance) {
+            font = form.daFont;
+        } else {
+            font = [UIFont systemFontOfSize:_baseFontSize];
         }
+        
+        if( multiline ) {
+            UITextView *tv = [[UITextView alloc] initWithFrame:textFrame];
+            tv.font = font;
+            tv.textColor = form.daColor;
+            tv.textAlignment = (NSTextAlignment)alignment;
+            tv.autoresizingMask = UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleHeight;
+            tv.delegate = self;
+            tv.scrollEnabled = YES;
+            [tv setTextContainerInset:UIEdgeInsetsMake(4, 10, 4, 4)];
+            _textFieldOrTextView = tv;
+        } else {
+            UITextField *tf = [[UITextField alloc] initWithFrame:textFrame];
+            if (secureEntry) {
+                tf.secureTextEntry = YES;
+            }
+
+            tf.font = font;
+            tf.textColor = form.daColor;
+            tf.textAlignment = (NSTextAlignment)alignment;
+            tf.delegate = self;
+            tf.adjustsFontSizeToFitWidth = YES;
+            tf.minimumFontSize = PDFFormMinFontSize;
+            tf.autoresizingMask = UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleHeight;
+            tf.leftView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 10, frame.size.height)];
+            tf.leftViewMode = UITextFieldViewModeAlways;
+            [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(textChanged:) name:UITextFieldTextDidChangeNotification object:tf];
+            _textFieldOrTextView = tf;
+        }
+
         if (ro) {
             _textFieldOrTextView.userInteractionEnabled = NO;
         }
-        if (multiline) {
-            ((UITextView *)_textFieldOrTextView).textAlignment = (NSTextAlignment)alignment;
-            ((UITextView *)_textFieldOrTextView).autoresizingMask = UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleHeight;
-            ((UITextView *)_textFieldOrTextView).delegate = self;
-            ((UITextView *)_textFieldOrTextView).scrollEnabled = YES;
-            [((UITextView *)_textFieldOrTextView) setTextContainerInset:UIEdgeInsetsMake(4, 10, 4, 4)];
-        } else {
-            ((UITextField *)_textFieldOrTextView).textAlignment = (NSTextAlignment)alignment;
-            ((UITextField *)_textFieldOrTextView).delegate = self;
-            ((UITextField *)_textFieldOrTextView).adjustsFontSizeToFitWidth = YES;
-            ((UITextField *)_textFieldOrTextView).minimumFontSize = PDFFormMinFontSize;
-            ((UITextField *)_textFieldOrTextView).autoresizingMask = UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleHeight;
-            ((UITextField *)_textFieldOrTextView).leftView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 10, frame.size.height)];
-            ((UITextField *)_textFieldOrTextView).leftViewMode = UITextFieldViewModeAlways;
-            [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(textChanged:) name:UITextFieldTextDidChangeNotification object:_textFieldOrTextView];
-        }
+        
         _textFieldOrTextView.opaque = NO;
         _textFieldOrTextView.backgroundColor = [UIColor clearColor];
         _baseFontSize = [PDFWidgetAnnotationView fontSizeForRect:frame value:nil multiline:multiline choice:NO];
         _currentFontSize = _baseFontSize;
-        if(form.defaultAppearance) {
-            [_textFieldOrTextView performSelector:@selector(setTextColor:) withObject:form.daColor];
-            [_textFieldOrTextView performSelector:@selector(setFont:) withObject:form.daFont];
-//            NSLog(@"Form (%@) [%@]: defaultAppearance: %f size, %@ font", form.name, form.uname, form.daSize, form.daFont.fontName );
-        } else {
-            [_textFieldOrTextView performSelector:@selector(setTextColor:) withObject:form.daColor];
-            [_textFieldOrTextView performSelector:@selector(setFont:) withObject:[UIFont systemFontOfSize:_baseFontSize]];
-//            NSLog(@"Form (%@) [%@]: defaultAppearance: %f size, %@ font", form.name, form.uname, _baseFontSize, @"System" );
-        }
         
         [self addSubview:_textFieldOrTextView];
     }

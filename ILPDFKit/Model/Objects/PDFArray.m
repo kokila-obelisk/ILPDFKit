@@ -199,7 +199,7 @@
 - (PDFString *)stringAtIndex:(NSUInteger)index {
     CGPDFStringRef str = NULL;
     if (CGPDFArrayGetString(_arr, index, &str)) {
-        return [[PDFString alloc] initWithTextString:(__bridge NSString *)CGPDFStringCopyTextString(str)];
+        return [[PDFString alloc] initWithTextString:(__bridge_transfer NSString *)CGPDFStringCopyTextString(str)];
     }
     return nil;
 }

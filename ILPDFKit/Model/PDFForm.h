@@ -78,7 +78,7 @@ typedef NS_ENUM(NSUInteger, PDFFormType) {
 
 /** The value of the form.
  */
-@property (nonatomic, strong) NSString *value;
+@property (nonatomic, strong, nullable) NSString *value;
 
 /** The page number on which the form appears. The first page has value 1.
  */
@@ -102,7 +102,7 @@ typedef NS_ENUM(NSUInteger, PDFFormType) {
 /**
  The form widget that represents this form element.
  */
-@property (nonatomic, readonly) PDFWidgetAnnotationView *widget;
+@property (nonatomic, readonly, nullable) PDFWidgetAnnotationView *widget;
 
 /** The crop box for the parent PDF page.
  */
@@ -116,17 +116,17 @@ typedef NS_ENUM(NSUInteger, PDFFormType) {
 /** The full, period delimeted form name.
  e.g PersonalInfo.Address.PostalCode
  */
-@property (nonatomic, strong, readonly) NSString *name;
+@property (nonatomic, strong, readonly, nullable) NSString *name;
 
 
 /** The name of the field shown to the user (aka tooltip)
  */
-@property (nonatomic, strong, readonly) NSString *uname;
+@property (nonatomic, strong, readonly, nullable) NSString *uname;
 
 
 /** The default value for the form.
  */
-@property (nonatomic, strong, readonly) NSString *defaultValue;
+@property (nonatomic, strong, readonly, nullable) NSString *defaultValue;
 
 /** A string containing all flags.
  Current supported flags are:
@@ -150,19 +150,19 @@ typedef NS_ENUM(NSUInteger, PDFFormType) {
  - NoView
  
  */
-@property (nonatomic, strong, readonly) NSString *flagsString;
+@property (nonatomic, strong, readonly, nullable) NSString *flagsString;
 
 
 /** For choice fields only, the options of the combo box.
  */
-@property (nonatomic, strong) NSArray *options;
+@property (nonatomic, strong, nullable) NSArray *options;
 
 /** For Choice and Text fields, the default appearance sets the font, size, and colour.
  */
-@property (nonatomic, readonly) NSString *defaultAppearance;
-@property (nonatomic, readonly) UIColor *daColor;
+@property (nonatomic, readonly, nullable) NSString *defaultAppearance;
+@property (nonatomic, readonly, nullable) UIColor *daColor;
 @property (nonatomic, readonly) CGFloat daSize;
-@property (nonatomic, readonly) UIFont *daFont;
+@property (nonatomic, readonly, nullable) UIFont *daFont;
 
 /** The intended text alignemnt for text in the form.
  */
@@ -178,18 +178,18 @@ typedef NS_ENUM(NSUInteger, PDFFormType) {
 
 /** The form container that owns the form
  */
-@property (nonatomic, weak, readonly) PDFFormContainer *parent;
+@property (nonatomic, weak, readonly, nullable) PDFFormContainer *parent;
 
 
 /** The NSArray of NSNumber values representing the raw frame rectangle for the form.
  */
-@property (nonatomic, strong, readonly) NSArray *rawRect;
+@property (nonatomic, strong, readonly, nullable) NSArray *rawRect;
 
 
 /** This is used with button forms only. Gives the name of the choice represented by that button.
  @discussion If a button is part of a group of buttons where only one may be selected at once, then it's value is the exportValue of the selected button. All buttons in such a group have the same name and represent a single form conceptually. Thus all forms in a radio button or check box group represent the field and always have the same value. A button is selected if and only if its exportValue is the same as its value. If no buttons are selected, or an unselected button is single and not part of a group, then the value is nil.
  */
-@property (nonatomic, strong, readonly) NSString *exportValue;
+@property (nonatomic, strong, readonly, nullable) NSString *exportValue;
 
 
 /** Indicates if the form has been modified by user input.
@@ -199,13 +199,13 @@ typedef NS_ENUM(NSUInteger, PDFFormType) {
 
 /** The appearance stream for the set state of button forms. Can be used to customize button appearance to better match the PDF.
  */
-@property (nonatomic, strong, readonly) NSString *setAppearanceStream;
+@property (nonatomic, strong, readonly, nullable) NSString *setAppearanceStream;
 
 
 /**
  The field dictionary that defines the form
  */
-@property (nonatomic, strong, readonly) PDFDictionary *dictionary;
+@property (nonatomic, strong, readonly, nullable) PDFDictionary *dictionary;
 
 /**---------------------------------------------------------------------------------------
  * @name Creating a PDFForm
@@ -220,12 +220,12 @@ typedef NS_ENUM(NSUInteger, PDFFormType) {
  @param p The parent.
  @return A new PDFForm object. 
  */
-- (instancetype)initWithFieldDictionary:(PDFDictionary *)leaf page:(PDFPage *)pg parent:(PDFFormContainer *)p NS_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithFieldDictionary:(nonnull PDFDictionary *)leaf page:(nonnull PDFPage *)pg parent:(nonnull PDFFormContainer *)p NS_DESIGNATED_INITIALIZER;
 
 /**
  * Make default initializer unavailable.
  */
-- (instancetype) __unavailable init;
+- (nonnull instancetype) __unavailable init;
 
 /**---------------------------------------------------------------------------------------
  * @name Updating Data
@@ -245,7 +245,7 @@ typedef NS_ENUM(NSUInteger, PDFFormType) {
  @param ctx The PDF context to render into.
  @param rect The rectangle to render on.
  */
-- (void)vectorRenderInPDFContext:(CGContextRef)ctx forRect:(CGRect)rect;
+- (void)vectorRenderInPDFContext:(_Nonnull CGContextRef)ctx forRect:(CGRect)rect;
 
 /** Returns a view to represent the form.
  
@@ -255,7 +255,7 @@ typedef NS_ENUM(NSUInteger, PDFFormType) {
  @return A new view representing the form. The caller is responsible for releasing the new form view.
  @discussion The superview must be a UIScrollView or a subclass of UIScrollView.
  */
-- (PDFWidgetAnnotationView *)createWidgetAnnotationViewForSuperviewWithWidth:(CGFloat)vwidth xMargin:(CGFloat)xmargin yMargin:(CGFloat)ymargin;
+- (nullable PDFWidgetAnnotationView *)createWidgetAnnotationViewForSuperviewWithWidth:(CGFloat)vwidth xMargin:(CGFloat)xmargin yMargin:(CGFloat)ymargin;
 
 /**---------------------------------------------------------------------------------------
  * @name KVO
@@ -269,5 +269,3 @@ typedef NS_ENUM(NSUInteger, PDFFormType) {
 - (void)removeObservers;
 
 @end
-
-
