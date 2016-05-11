@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
 
 s.name         = "ILPDFKit"
-s.version      = "0.2.3"
+s.version      = "0.2.4"
 s.summary      = "A simple toolkit for filling out and saving PDF forms, and extracting PDF data."
 s.homepage     = "http://ilpdfkit.com"
 s.screenshot  = "http://imgur.com/oo5HLUg.png"
