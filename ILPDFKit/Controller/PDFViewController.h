@@ -25,15 +25,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@class PDFViewController;
 @class PDFDocument;
-
-@protocol PDFViewControllerDelegate <NSObject>
-
-@optional -(void)pdfViewController:(PDFViewController*)controller didUpdateForm:(PDFForm*)form withValue:(NSString*)value;
-
-@end
-
 
 /**The PDFViewController class allows for convienient viewing  of a PDF document using a UIViewController subclass. It represents the controller that renders a PDF using its view (PDFView) with data from its model (PDFDocument). Displaying a PDF file is very simple using PDFViewController.
  
@@ -50,10 +42,6 @@ NS_ASSUME_NONNULL_BEGIN
 /** The PDFView that represents the view for the PDFViewController
  */
 @property (nonatomic, strong) PDFView * _Nullable pdfView;
-
-/** Delgate for the PDFViewController handling updates in the form
- */
-@property (nonatomic, weak) id<PDFViewControllerDelegate> delegate;
 
 /**---------------------------------------------------------------------------------------
  * @name Creating a PDFViewController
