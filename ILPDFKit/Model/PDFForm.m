@@ -201,8 +201,9 @@
         _modified = YES;
     }
     if (_value != val) {
-        _value = nil;;
+        _value = nil;
         _value = val;
+        [_parent.delegate pdfFormContainer:_parent didUpdateForm:self withValue:val];
     }
 }
 

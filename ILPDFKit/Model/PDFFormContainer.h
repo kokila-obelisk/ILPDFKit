@@ -25,6 +25,15 @@
 
 
 @class PDFDocument;
+@class PDFFormContainer;
+
+@protocol PDFFormContainerDelegate <NSObject>
+
+@optional
+-(void)pdfFormContainer:(PDFFormContainer*)container didUpdateForm:(PDFForm*)form withValue:(NSString*)value;
+
+@end
+
 
 /** The PDFFormContainer class represents a container class for all the PDFForm objects attached to a PDFDocument.
  */
@@ -33,6 +42,10 @@
 /** The parent PDFDocument.
  */
 @property (nonatomic, weak) PDFDocument *document;
+
+/** Delegate for form updates
+ */
+@property (nonatomic, weak) id<PDFFormContainerDelegate> delegate;
 
 /**---------------------------------------------------------------------------------------
  * @name Creating a PDFFormContainer

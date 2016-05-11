@@ -99,6 +99,13 @@
     if (_options != opt) {
         _options = opt;
     }
+    if (self.value != nil) {
+        NSUInteger nind = [_options indexOfObject:self.value];
+        _selectedIndex = nind;
+        if (nind == NSNotFound && self.value) {
+            _form.value = nil;
+        }
+    }
 }
 
 - (NSArray *)options {
