@@ -320,7 +320,7 @@
      */
     CGFloat hmargin = ((maxWidth-width)/2)*((vwidth-2*xmargin)/maxWidth)+xmargin;
     CGFloat height = _cropBox.size.height;
-    CGRect correctedFrame = CGRectMake(_frame.origin.x-_cropBox.origin.x, height-_frame.origin.y-_frame.size.height-_cropBox.origin.y, _frame.size.width, _frame.size.height);
+    CGRect correctedFrame = CGRectMake(_frame.origin.x-_cropBox.origin.x, height-_frame.origin.y-_frame.size.height+_cropBox.origin.y, _frame.size.width, _frame.size.height);
     CGFloat realWidth = vwidth-2*hmargin;
     CGFloat factor = realWidth/width;
     CGFloat pageOffset = 0;

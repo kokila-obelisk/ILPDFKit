@@ -312,7 +312,7 @@ static CGFloat const DoublePageCachingMargin = PageCachingMargin * 2.f;
             // Calculate all the pageFrames
             [_pages enumerateObjectsUsingBlock:^(id page, NSUInteger index, BOOL *stop) {
 
-                CGSize pageSize = CGPDFPageGetBoxRect((__bridge CGPDFPageRef)page, kCGPDFMediaBox).size;
+                CGSize pageSize = CGPDFPageGetBoxRect((__bridge CGPDFPageRef)page, kCGPDFCropBox).size;
 
                 int rotation = CGPDFPageGetRotationAngle((__bridge CGPDFPageRef)page);
                 if(rotation == 90 || rotation == 270) {
@@ -359,7 +359,7 @@ static CGFloat const DoublePageCachingMargin = PageCachingMargin * 2.f;
             
             [_pages enumerateObjectsUsingBlock:^(id page, NSUInteger index, BOOL *stop) {
                 
-                CGSize pageSize = CGPDFPageGetBoxRect((__bridge CGPDFPageRef)page, kCGPDFMediaBox).size;
+                CGSize pageSize = CGPDFPageGetBoxRect((__bridge CGPDFPageRef)page, kCGPDFCropBox).size;
 
                 // calculate the page frame which fits -- attempt to fit full height first
                 CGRect frame;
@@ -485,7 +485,7 @@ static CGFloat const DoublePageCachingMargin = PageCachingMargin * 2.f;
 
         CGContextRef context = CGBitmapContextCreate(NULL, size.width, size.height, 8, size.width * 4, _cs, kCGImageAlphaPremultipliedLast|kCGBitmapByteOrder32Big);
 
-        CGSize mediaSize = CGPDFPageGetBoxRect(page, kCGPDFMediaBox).size;
+        CGSize mediaSize = CGPDFPageGetBoxRect(page, kCGPDFCropBox).size;
         int rotation = CGPDFPageGetRotationAngle(page);
         if(rotation == 90 || rotation == 270) {
             mediaSize = CGSizeMake(mediaSize.height, mediaSize.width);
@@ -493,7 +493,7 @@ static CGFloat const DoublePageCachingMargin = PageCachingMargin * 2.f;
 
         CGContextScaleCTM(context, size.width / mediaSize.width, size.height / mediaSize.height );
         CGContextTranslateCTM(context, (mediaSize.width - size.width) / 2.f, (mediaSize.height - size.height) / 2.f);
-        CGContextConcatCTM(context, CGPDFPageGetDrawingTransform(page, kCGPDFMediaBox, (CGRect){ CGPointZero, size }, 0, true));
+        CGContextConcatCTM(context, CGPDFPageGetDrawingTransform(page, kCGPDFCropBox, (CGRect){ CGPointZero, size }, 0, true));
         
         CGContextDrawPDFPage(context, page);
         
