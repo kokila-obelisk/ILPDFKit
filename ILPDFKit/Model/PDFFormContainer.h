@@ -24,7 +24,7 @@
 #import "PDFForm.h"
 
 
-@class PDFDocument;
+@class ILPDFDocument;
 @class PDFFormContainer;
 
 @protocol PDFFormContainerDelegate <NSObject>
@@ -35,13 +35,13 @@
 @end
 
 
-/** The PDFFormContainer class represents a container class for all the PDFForm objects attached to a PDFDocument.
+/** The PDFFormContainer class represents a container class for all the PDFForm objects attached to a ILPDFDocument.
  */
 @interface PDFFormContainer : NSObject <NSFastEnumeration>
 
-/** The parent PDFDocument.
+/** The parent ILPDFDocument.
  */
-@property (nonatomic, weak) PDFDocument *document;
+@property (nonatomic, weak) ILPDFDocument *document;
 
 /** Delegate for form updates
  */
@@ -52,10 +52,10 @@
  *  ---------------------------------------------------------------------------------------
  */
 /** Creates a new instance of PDFFormContainer
- @param parent The PDFDocument that owns the PDFFormContainer.
+ @param parent The ILPDFDocument that owns the PDFFormContainer.
  @return A new PDFFormContainer object.
  */
-- (instancetype)initWithParentDocument:(PDFDocument *)parent NS_DESIGNATED_INITIALIZER;
+- (instancetype)initWithParentDocument:(ILPDFDocument *)parent NS_DESIGNATED_INITIALIZER;
 
 /**
  * Make super designated initializer unavailable.

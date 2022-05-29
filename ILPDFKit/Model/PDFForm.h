@@ -56,7 +56,7 @@ typedef NS_ENUM(NSUInteger, PDFFormType) {
 };
 
 @class PDFFormContainer;
-@class PDFPage;
+@class ILPDFPage;
 @class PDFDictionary;
 @class PDFWidgetAnnotationView;
 
@@ -220,7 +220,7 @@ typedef NS_ENUM(NSUInteger, PDFFormType) {
  @param p The parent.
  @return A new PDFForm object. 
  */
-- (nonnull instancetype)initWithFieldDictionary:(nonnull PDFDictionary *)leaf page:(nonnull PDFPage *)pg parent:(nonnull PDFFormContainer *)p NS_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithFieldDictionary:(nonnull PDFDictionary *)leaf page:(nonnull ILPDFPage *)pg parent:(nonnull PDFFormContainer *)p NS_DESIGNATED_INITIALIZER;
 
 /**
  * Make default initializer unavailable.

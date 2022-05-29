@@ -23,7 +23,7 @@
 #import <Foundation/Foundation.h>
 #import "PDFObject.h"
 
-/** The PDFArray class encapsulates a PDF array object contained in a PDFDocument.
+/** The PDFArray class encapsulates a PDF array object contained in a ILPDFDocument.
  Essentially, is is a wrapper class for a CGPDFArrayRef.
  
      CGPDFArrayRef pdfARef = myCGPDFArrayRef;

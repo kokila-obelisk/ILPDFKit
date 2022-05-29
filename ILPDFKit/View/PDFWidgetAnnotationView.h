@@ -26,7 +26,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @class PDFFormChoiceField;
 @class PDFWidgetAnnotationView;
-@class PDFView;
+@class ILPDFView;
 
 /** The PDFWidgetAnnotationViewDelegate responds to user interaction with a PDFWidgetAnnotationView.
  */
@@ -49,7 +49,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @end
 
-/** The PDFWidgetAnnotationView represents a subview of a PDFView that represents an interactive or accessory element. A PDFForm is an example.
+/** The PDFWidgetAnnotationView represents a subview of a ILPDFView that represents an interactive or accessory element. A PDFForm is an example.
  */
 @interface PDFWidgetAnnotationView : UIView {
     CGFloat _zoomScale;
@@ -75,7 +75,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 /** The parent view.
  */
-@property (nonatomic, weak) PDFView * _Nullable parentView;
+@property (nonatomic, weak) ILPDFView * _Nullable parentView;
 
 /**---------------------------------------------------------------------------------------
  * @name Updating Metrics

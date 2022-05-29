@@ -21,13 +21,13 @@
 // THE SOFTWARE.
 
 #import <UIKit/UIKit.h>
-#import "PDFView.h"
+#import "ILPDFView.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
-@class PDFDocument;
+@class ILPDFDocument;
 
-/**The PDFViewController class allows for convienient viewing  of a PDF document using a UIViewController subclass. It represents the controller that renders a PDF using its view (PDFView) with data from its model (PDFDocument). Displaying a PDF file is very simple using PDFViewController.
+/**The PDFViewController class allows for convienient viewing  of a PDF document using a UIViewController subclass. It represents the controller that renders a PDF using its view (ILPDFView) with data from its model (ILPDFDocument). Displaying a PDF file is very simple using PDFViewController.
  
         PDFViewController *pdfViewController = [[PDFViewController alloc] initWithResource:@"myPDF.pdf"];
         [self.navigationController pushDetailViewController:pdfViewController animated:YES];
@@ -35,13 +35,13 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface PDFViewController : UIViewController <PDFViewDelegate>
 
-/** The PDFDocument that represents the model for the PDFViewController
+/** The ILPDFDocument that represents the model for the PDFViewController
  */
-@property (nonatomic, strong) PDFDocument * _Nullable document;
+@property (nonatomic, strong) ILPDFDocument * _Nullable document;
 
-/** The PDFView that represents the view for the PDFViewController
+/** The ILPDFView that represents the view for the PDFViewController
  */
-@property (nonatomic, strong) PDFView * _Nullable pdfView;
+@property (nonatomic, strong) ILPDFView * _Nullable pdfView;
 
 /**---------------------------------------------------------------------------------------
  * @name Creating a PDFViewController

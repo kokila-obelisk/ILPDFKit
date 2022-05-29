@@ -24,7 +24,7 @@
 #import "PDFObject.h"
 
 
-/** The PDFStream class encapsulates a PDF stream object contained in a PDFDocument.
+/** The PDFStream class encapsulates a PDF stream object contained in a ILPDFDocument.
  Essentially, is is a wrapper class for a CGPDFStreamRef.
  
     CGPDFStreamRef pdfSRef = myCGPDFStreamRef;

@@ -63,7 +63,7 @@
 - (instancetype)initWithData:(NSData *)data {
     self = [super initWithNibName:nil bundle:nil];
     if (self != nil) {
-        _document = [[PDFDocument alloc] initWithData:data];
+        _document = [[ILPDFDocument alloc] initWithData:data];
     }
     return self;
 }
@@ -71,7 +71,7 @@
 - (instancetype)initWithResource:(NSString *)name {
     self = [super initWithNibName:nil bundle:nil];
     if (self != nil) {
-        _document = [[PDFDocument alloc] initWithResource:name];
+        _document = [[ILPDFDocument alloc] initWithResource:name];
     }
     return self;
 }
@@ -79,7 +79,7 @@
 - (instancetype)initWithPath:(NSString *)path {
     self = [super initWithNibName:nil bundle:nil];
     if(self != nil) {
-        _document = [[PDFDocument alloc] initWithPath:path];
+        _document = [[ILPDFDocument alloc] initWithPath:path];
     }
     return self;
 }
@@ -105,7 +105,7 @@
     id pass = (_document.documentPath ? _document.documentPath:_document.documentData);
     CGPoint margins = [self getMargins];
     NSArray *additionViews = [_document.forms createWidgetAnnotationViewsForSuperviewWithWidth:self.view.bounds.size.width margin:margins.x hMargin:margins.y];
-    _pdfView = [[PDFView alloc] initWithFrame:self.view.bounds dataOrPath:pass additionViews:additionViews];
+    _pdfView = [[ILPDFView alloc] initWithFrame:self.view.bounds dataOrPath:pass additionViews:additionViews];
     _pdfView.delegate = self;
     [self.view addSubview:_pdfView];
 }
@@ -134,7 +134,7 @@
 
 #pragma mark - PDFViewDelegate handlers
 
-- (void) pdfView:(PDFView *)view withForm:(PDFForm *)form choiceFieldWasHit:(PDFFormChoiceField *)field {
+- (void) pdfView:(ILPDFView *)view withForm:(PDFForm *)form choiceFieldWasHit:(PDFFormChoiceField *)field {
     UIPopoverPresentationController *popover;
     
     if( [form.uname isEqualToString:@"date"] ) {

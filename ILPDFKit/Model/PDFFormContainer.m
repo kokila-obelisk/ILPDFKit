@@ -42,14 +42,14 @@
 
 #pragma mark - Initialization
 
-- (instancetype)initWithParentDocument:(PDFDocument *)parent {
+- (instancetype)initWithParentDocument:(ILPDFDocument *)parent {
     self = [super init];
     if (self != nil) {
         _allForms = [[NSMutableArray alloc] init];
         _nameTree = [[NSMutableDictionary alloc] init];
         _document = parent;
         NSMutableDictionary *pmap = [NSMutableDictionary dictionary];
-        for (PDFPage *page in _document.pages) {
+        for (ILPDFPage *page in _document.pages) {
             pmap[@((NSUInteger)(page.dictionary.dict))] = @(page.pageNumber);
         }
         for (PDFDictionary *field in _document.catalog[@"AcroForm"][@"Fields"]) {

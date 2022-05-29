@@ -1,4 +1,4 @@
-// PDFDocument.h
+// ILPDFDocument.h
 //
 // Copyright (c) 2015 Iwe Labs
 //
@@ -23,13 +23,13 @@
 #import <Foundation/Foundation.h>
 
 
-/** PDFDocument represents a PDF document either loaded from file or disk. The class provides tools to reveal the structure, content and metadata of a PDF. PDFDocument serves as the model for PDFViewController to render an interactive PDF on a PDFView.
+/** ILPDFDocument represents a PDF document either loaded from file or disk. The class provides tools to reveal the structure, content and metadata of a PDF. ILPDFDocument serves as the model for PDFViewController to render an interactive PDF on a ILPDFView.
  */
 
 @class PDFDictionary;
 @class PDFFormContainer;
 
-@interface PDFDocument : NSObject
+@interface ILPDFDocument : NSObject
 
 /** The PDF file data.
  */
@@ -53,7 +53,7 @@
  */
 @property (nonatomic, readonly) PDFDictionary *info;
 
-/** An array containing PDFPage objects cooresponding in order and content to the pages of the document.
+/** An array containing ILPDFPage objects cooresponding in order and content to the pages of the document.
  */
 @property (nonatomic, readonly) NSArray *pages;
 
@@ -67,29 +67,29 @@
 
 
 /**---------------------------------------------------------------------------------------
- * @name Creating a PDFDocument
+ * @name Creating a ILPDFDocument
  *  ---------------------------------------------------------------------------------------
  */
 
-/** Creates a new instance of PDFDocument.
+/** Creates a new instance of ILPDFDocument.
  
  @param data Content of the document.
- @return A new instance of PDFDocument initialized with data.
+ @return A new instance of ILPDFDocument initialized with data.
  */
 
 - (instancetype)initWithData:(NSData *)data NS_DESIGNATED_INITIALIZER;
 
-/** Creates a new instance of PDFDocument.
+/** Creates a new instance of ILPDFDocument.
  
  @param name Resource to load.
- @return A new instance of PDFDocument initialized with a PDF resource named name.
+ @return A new instance of ILPDFDocument initialized with a PDF resource named name.
  */
 - (instancetype)initWithResource:(NSString *)name NS_DESIGNATED_INITIALIZER;
 
-/** Creates a new instance of PDFDocument.
+/** Creates a new instance of ILPDFDocument.
  
  @param path Points to PDF file to load.
- @return A new instance of PDFDocument initialized with a PDF located at path.
+ @return A new instance of ILPDFDocument initialized with a PDF located at path.
  */
 - (instancetype)initWithPath:(NSString *)path NS_DESIGNATED_INITIALIZER;
 
@@ -127,7 +127,7 @@
  @param docToAppend
  @return The PDF data of the result when the passed document is appended to the receiver.
  */
-- (NSData *)mergedDataWithDocument:(PDFDocument *)docToAppend;
+- (NSData *)mergedDataWithDocument:(ILPDFDocument *)docToAppend;
 
 /**
  Converts a PDF page to an image.

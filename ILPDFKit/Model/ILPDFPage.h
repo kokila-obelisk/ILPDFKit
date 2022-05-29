@@ -1,4 +1,4 @@
-// PDFPage.h
+// ILPDFPage.h
 //
 // Copyright (c) 2015 Iwe Labs
 //
@@ -23,28 +23,28 @@
 #import <Foundation/Foundation.h>
 
 
-/** The PDFPage class encapsulates a single page contained in a PDFDocument.
+/** The ILPDFPage class encapsulates a single page contained in a ILPDFDocument.
  Essentially, is is a wrapper class for a CGPDFPageRef.
  
     CGPDFPageRef pdfPRef = myCGPDFPageRef;
-    PDFPage* pdfPage = [[PDFPage alloc] initWithPage:pdfPRef];
+    ILPDFPage* pdfPage = [[ILPDFPage alloc] initWithPage:pdfPRef];
  
- PDFPage consists of the data representing the page info.
+ ILPDFPage consists of the data representing the page info.
  */
 
 @class PDFDictionary;
 
-@interface PDFPage : NSObject
+@interface ILPDFPage : NSObject
 
 /**---------------------------------------------------------------------------------------
- * @name Creating a PDFPage
+ * @name Creating a ILPDFPage
  *  ---------------------------------------------------------------------------------------
  */
 
-/** Creates a new instance of PDFPage wrapping a CGPDFPageRef
+/** Creates a new instance of ILPDFPage wrapping a CGPDFPageRef
  
  @param pg A CGPDFPageRef representing the PDF page.
- @return A new PDFPage object. 
+ @return A new ILPDFPage object. 
  */
 - (instancetype)initWithPage:(CGPDFPageRef)pg NS_DESIGNATED_INITIALIZER;
 

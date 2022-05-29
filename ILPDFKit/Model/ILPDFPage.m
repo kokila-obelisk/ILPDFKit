@@ -1,4 +1,4 @@
-// PDFPage.m
+// ILPDFPage.m
 //
 // Copyright (c) 2015 Iwe Labs
 //
@@ -20,14 +20,14 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-#import "PDFPage.h"
+#import "ILPDFPage.h"
 #import "PDFDictionary.h"
 
-@interface PDFPage(Private)
+@interface ILPDFPage(Private)
 - (CGRect)rotateBox:(CGRect)box;
 @end
 
-@implementation PDFPage {
+@implementation ILPDFPage {
     CGPDFPageRef _page;
     PDFDictionary *_dictionary;
     PDFDictionary *_resources;

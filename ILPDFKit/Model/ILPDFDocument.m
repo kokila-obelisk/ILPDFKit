@@ -1,4 +1,4 @@
-// PDFDocument.m
+// ILPDFDocument.m
 //
 // Copyright (c) 2015 Iwe Labs
 //
@@ -20,12 +20,12 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-#import "PDFDocument.h"
+#import "ILPDFDocument.h"
 #import "PDFForm.h"
 #import "PDFDictionary.h"
 #import "PDFArray.h"
 #import "PDFStream.h"
-#import "PDFPage.h"
+#import "ILPDFPage.h"
 #import "PDFUtility.h"
 #import "PDFFormButtonField.h"
 #import "PDFFormContainer.h"
@@ -55,7 +55,7 @@ static void renderPage(NSUInteger page, CGContextRef ctx, CGPDFDocumentRef doc, 
     }
 }
 
-@implementation PDFDocument {
+@implementation ILPDFDocument {
     NSString *_documentPath;
     PDFDictionary *_catalog;
     PDFDictionary *_info;
@@ -69,7 +69,7 @@ static void renderPage(NSUInteger page, CGContextRef ctx, CGPDFDocumentRef doc, 
     CGPDFDocumentRelease(_document);
 }
 
-#pragma mark - PDFDocument
+#pragma mark - ILPDFDocument
 
 - (instancetype)initWithData:(NSData *)data {
     self = [super init];
@@ -142,7 +142,7 @@ static void renderPage(NSUInteger page, CGContextRef ctx, CGPDFDocumentRef doc, 
     if (_pages == nil) {
         NSMutableArray* temp = [[NSMutableArray alloc] init];
         for (NSUInteger i = 0; i < CGPDFDocumentGetNumberOfPages(_document); i++) {
-            [temp addObject:[[PDFPage alloc] initWithPage:CGPDFDocumentGetPage(_document,i+1)]];
+            [temp addObject:[[ILPDFPage alloc] initWithPage:CGPDFDocumentGetPage(_document,i+1)]];
         }
         _pages = [[NSArray alloc] initWithArray:temp];
     }
@@ -173,7 +173,7 @@ static void renderPage(NSUInteger page, CGContextRef ctx, CGPDFDocumentRef doc, 
 }
 
 
-- (NSData *)mergedDataWithDocument:(PDFDocument *)docToAppend {
+- (NSData *)mergedDataWithDocument:(ILPDFDocument *)docToAppend {
     NSMutableData *pageData = [NSMutableData data];
     UIGraphicsBeginPDFContextToData(pageData, CGRectZero , nil);
     CGContextRef ctx = UIGraphicsGetCurrentContext();

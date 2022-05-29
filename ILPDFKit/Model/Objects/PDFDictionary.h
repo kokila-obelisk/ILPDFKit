@@ -24,7 +24,7 @@
 #import "PDFObject.h"
 #import "PDFName.h"
 
-/** The PDFDictionary class encapsulates a PDF dictionary object contained in a PDFDocument. 
+/** The PDFDictionary class encapsulates a PDF dictionary object contained in a ILPDFDocument. 
  Essentially, is is a wrapper class for a CGPDFDictionaryRef.
  
         CGPDFDictionaryRef pdfDRef = CGPDFDocumentGetCatalog(document);

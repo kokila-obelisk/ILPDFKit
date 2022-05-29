@@ -53,7 +53,7 @@
 #pragma mark - PDFForm
 #pragma mark - Initialization
 
-- (instancetype)initWithFieldDictionary:(PDFDictionary *)leaf page:(PDFPage *)pg parent:(PDFFormContainer *)p {
+- (instancetype)initWithFieldDictionary:(PDFDictionary *)leaf page:(ILPDFPage *)pg parent:(PDFFormContainer *)p {
     self = [super init];
     if (self != nil) {
         _dictionary = leaf;
@@ -152,7 +152,7 @@
         _parent = p;
         {
             BOOL noRotate = (_annotFlags & PDFAnnotationFlagNoRotate) > 0;
-            NSUInteger rotation = [(PDFPage *)(self.parent.document.pages[_page-1]) rotationAngle];
+            NSUInteger rotation = [(ILPDFPage *)(self.parent.document.pages[_page-1]) rotationAngle];
             if (noRotate)rotation = 0;
             CGFloat a = self.frame.size.width;
             CGFloat b = self.frame.size.height;
@@ -308,7 +308,7 @@
     if ((_annotFlags & PDFAnnotationFlagNoView) > 0) return nil;
     CGFloat width = _cropBox.size.width;
     CGFloat maxWidth = width;
-    for (PDFPage *pg in self.parent.document.pages) {
+    for (ILPDFPage *pg in self.parent.document.pages) {
         if([pg cropBox].size.width > maxWidth) maxWidth = [pg cropBox].size.width;
     }
     /*
@@ -325,7 +325,7 @@
     CGFloat factor = realWidth/width;
     CGFloat pageOffset = 0;
     for (NSUInteger c = 0; c < self.page-1; c++) {
-        PDFPage *pg = self.parent.document.pages[c];
+        ILPDFPage *pg = self.parent.document.pages[c];
         CGFloat iwidth = [pg cropBox].size.width;
         CGFloat ihmargin = ((maxWidth-iwidth)/2)*((vwidth-2*xmargin)/maxWidth)+xmargin;
         CGFloat iheight = [pg cropBox].size.height;

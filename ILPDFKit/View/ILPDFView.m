@@ -1,4 +1,4 @@
-// PDFView.m
+// ILPDFView.m
 //
 // Copyright (c) 2015 Iwe Labs
 //
@@ -24,18 +24,18 @@
 #import "PDFFormButtonField.h"
 #import "PDF.h"
 
-@interface PDFView(Delegates) <UIScrollViewDelegate,UIGestureRecognizerDelegate,UIWebViewDelegate>
+@interface ILPDFView(Delegates) <UIScrollViewDelegate,UIGestureRecognizerDelegate,UIWebViewDelegate>
 @end
 
-@interface PDFView(Private)
+@interface ILPDFView(Private)
 - (void)fadeInWidgetAnnotations;
 @end
 
-@implementation PDFView {
+@implementation ILPDFView {
     BOOL _canvasLoaded;
 }
 
-#pragma mark - PDFView
+#pragma mark - ILPDFView
 
 - (instancetype)initWithFrame:(CGRect)frame dataOrPath:(id)dataOrPath additionViews:(NSArray*)widgetAnnotationViews {
     self = [super initWithFrame:frame];

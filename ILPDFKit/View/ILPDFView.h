@@ -1,4 +1,4 @@
-// PDFView.h
+// ILPDFView.h
 //
 // Copyright (c) 2015 Iwe Labs
 //
@@ -25,18 +25,18 @@
 
 @class PDFWidgetAnnotationView;
 @class PDFFormChoiceField;
-@class PDFView, PDFForm;
+@class ILPDFView, PDFForm;
 
 @protocol PDFViewDelegate <NSObject>
 
-- (void) pdfView:(PDFView*)view withForm:(PDFForm*)form choiceFieldWasHit:(PDFFormChoiceField*)field;
+- (void) pdfView:(ILPDFView*)view withForm:(PDFForm*)form choiceFieldWasHit:(PDFFormChoiceField*)field;
 
 @end
 
-/** The PDFView class allows for viewing a PDF file. The controller PDFViewController uses PDFView as its view and PDFDocument as its model.
- PDFView is typically not directly instantiated, but instead is used as the instance that comes with PDFViewController.
+/** The ILPDFView class allows for viewing a PDF file. The controller PDFViewController uses ILPDFView as its view and ILPDFDocument as its model.
+ ILPDFView is typically not directly instantiated, but instead is used as the instance that comes with PDFViewController.
  */
-@interface PDFView : UIView 
+@interface ILPDFView : UIView 
 
 /** The array contains the PDFWidgetAnnotationView instances that are subviews of the pdfView's scrollView.
  */
@@ -55,15 +55,15 @@
 @property (nonatomic, weak) id<PDFViewDelegate> delegate;
 
 /**---------------------------------------------------------------------------------------
- * @name Creating a PDFView
+ * @name Creating a ILPDFView
  *  ---------------------------------------------------------------------------------------
  */
-/** Creates a new instance of PDFView.
+/** Creates a new instance of ILPDFView.
  
  @param frame Frame of the view.
  @param dataOrPath Either NSData for PDF data or NSString for a PDF file path.
  @param widgetAnnotationViews NSArray of instances of PDFWidgetAnnotationalElementView to be added to the pdfView scrollView.
- @return A new instance of PDFView.
+ @return A new instance of ILPDFView.
  */
 
 - (instancetype)initWithFrame:(CGRect)frame dataOrPath:(id)dataOrPath additionViews:(NSArray *)widgetAnnotationViews NS_DESIGNATED_INITIALIZER;

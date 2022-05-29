@@ -31,13 +31,13 @@
 #import "PDFViewController.h" // Top level container of PDF View Controller
 
 // pdf data layer...
-#import "PDFDocument.h"
+#import "ILPDFDocument.h"
 #import "PDFFormContainer.h"
 #import "PDFForm.h"
-#import "PDFPage.h"
+#import "ILPDFPage.h"
 
 // pdf view layer...
-#import "PDFView.h"
+#import "ILPDFView.h"
 #import "PDFWidgetAnnotationView.h"
 
 #import "PDFUtility.h"
